@@ -270,6 +270,7 @@ const styles = StyleSheet.create({
   },
   backgroundImg: {
     alignSelf: 'center',
+    marginTop: 120,
   },
   title: {
     color: '#43C3EF',

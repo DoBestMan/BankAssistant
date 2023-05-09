@@ -28,8 +28,8 @@ const LoginContainer = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "email": "cam.adams.uk@gmail.com",
-        "password": "Password123!"
+        "email": email,
+        "password": password
       })
     };
     const jwt_token = await fetch('https://freshfabrics.app/api/v1/login', requestOptions);

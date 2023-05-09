@@ -1,0 +1,6 @@
+module Pods_FreshFrabric {
+  umbrella header "Pods-FreshFrabric-umbrella.h"
+
+  export *
+  module * { export * }
+}

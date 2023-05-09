@@ -289,14 +289,14 @@ const CustomerOnboardingContainer = () => {
                 <Text style={[Fonts.textRegular, styles.buttonText]}>Done</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={[Layout.center, Gutters.regularTMargin]}
                 onPress={() => setCurrentStep(4)}
               >
                 <Text style={[Fonts.textSmall, { color: '#43C3EF' }]}>
                   Skip for now
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
         )}

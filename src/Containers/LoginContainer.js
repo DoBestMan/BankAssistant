@@ -22,6 +22,13 @@ const LoginContainer = () => {
   const [password, setPassword] = useState('')
 
   const onLogin = async () => {
+    if (email === '' || password === '') {
+      Alert.alert('Error', 'Please enter email and password!', [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ,
+      ])
+      return
+    }
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -35,13 +42,22 @@ const LoginContainer = () => {
     const jwt_token = await fetch('https://freshfabrics.app/api/v1/login', requestOptions);
     console.log(`jwt_token`,jwt_token);
 
-    const user = await jwt_token.json();
-    console.log(`user`,user);
+    
+    if(jwt_token.status == 200)
+    {
+      const user = await jwt_token.json();
+      console.log(`user`,user);
 
-    const decoded_token = jwt_decode(user.bearerToken);
-    console.log(`decoded_token`,decoded_token);
-
-    navigate(decoded_token.role == 2 ? 'UserMain' : 'FreshieMain');
+      const decoded_token = jwt_decode(user.bearerToken);
+      console.log(`decoded_token`,decoded_token);
+      navigate(decoded_token.role == 2 ? 'UserMain' : 'FreshieMain');
+    }
+    else{
+      Alert.alert('Error', 'Email or Password is wrong!', [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ,
+      ])
+    }
   }
 
   return (

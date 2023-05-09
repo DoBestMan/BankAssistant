@@ -14,6 +14,7 @@ import { useTheme } from '@/Hooks'
 import { Brand } from '@/Components'
 import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
+import jwt_decode from "jwt-decode";
 
 const LoginContainer = () => {
   const { Layout, Images, Fonts, Common, Colors, Gutters } = useTheme()
@@ -21,42 +22,26 @@ const LoginContainer = () => {
   const [password, setPassword] = useState('')
 
   const onLogin = async () => {
-
-    console.log(20230508,`start onLogin`);
-
-    if (email === '' || password === '') {
-      Alert.alert('Error', 'Please enter email and password!', [
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ,
-      ])
-      return
-    }
-    const response = await fetch('https://freshfabrics.app/api/v1/login', {
+    const requestOptions = {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "email": email,
-        "password": password
-      }),
-    })
+        "email": "cam.adams.uk@gmail.com",
+        "password": "Password123!"
+      })
+    };
+    const jwt_token = await fetch('https://freshfabrics.app/api/v1/login', requestOptions);
+    console.log(`jwt_token`,jwt_token);
 
-    console.log(20230508,`fetch response`,response);
+    const user = await jwt_token.json();
+    console.log(`user`,user);
 
+    const decoded_token = jwt_decode(user.bearerToken);
+    console.log(`decoded_token`,decoded_token);
 
-    try {
-      const user = await response.json()
-      console.log(20230508,`user `, user)
-      navigate(user.user.role === 'user' ? 'UserMain' : 'FreshieMain')
-    } catch (e) {
-      console.log('----', e)
-      Alert.alert('Error', 'Email or Password is wrong!', [
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ,
-      ])
-    }
+    navigate(decoded_token.role == 2 ? 'UserMain' : 'FreshieMain');
   }
 
   return (

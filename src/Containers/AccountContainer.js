@@ -5,11 +5,13 @@ import {
   StyleSheet,
   Image,
   Text,
+  Modal,
   TouchableOpacity,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
 import { navigate } from '@/Navigators/utils'
 import { useState } from 'react'
+import Feedback from '@/Components/Feedback'
 
 const MENU_ITEMS = [
   'Profile',
@@ -26,6 +28,31 @@ const MENU_ITEMS = [
 const AccountContainer = () => {
   const { Layout, Images, Fonts, Gutters } = useTheme()
   const [selectedTab, setSelectedTab] = useState(0)
+  const [isFeedback, setIsFeedback] = useState(false)
+
+  const onClick = (item) => {
+    console.log(20230510,`account`,item);
+    switch(item){
+      case 'Profile':
+        break;
+      case 'My Address':
+        break;
+      case 'Payment methods':
+        break;
+      case 'Refer a friend':
+        break;
+      case 'Rewards':
+        break;
+      case 'Become a Freshie':
+        break;
+      case 'Feedback':
+        setIsFeedback(true);
+        break;
+      case 'Log out':
+        navigate('Login');
+        break;
+    }
+  }
 
   return (
     <SafeAreaView style={[Layout.fill, styles.container]}>
@@ -47,13 +74,26 @@ const AccountContainer = () => {
 
         <View style={Gutters.largeTMargin}>
           {MENU_ITEMS.map(menuItem => (
-            <TouchableOpacity key={menuItem} style={styles.item}>
+            <TouchableOpacity key={menuItem} style={styles.item} onPress={() => onClick(menuItem)}>
               <Text style={styles.itemText}>{menuItem}</Text>
               <Image source={Images.right_blue_arrow} resizeMode="contain" />
             </TouchableOpacity>
           ))}
         </View>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isFeedback}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          setIsFeedback(!isFeedback)
+        }}
+      >
+        <Feedback onClose={() => setIsFeedback(false)} />
+      </Modal>
+
     </SafeAreaView>
   )
 }

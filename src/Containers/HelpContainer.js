@@ -84,7 +84,7 @@ const HelpContainer = () => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
+          // Alert.alert('Modal has been closed.')
           setModalVisible(!modalVisible)
         }}
       >
@@ -95,7 +95,7 @@ const HelpContainer = () => {
         transparent={true}
         visible={faq}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
+          // Alert.alert('Modal has been closed.')
           setFaq(false)
         }}
       >
@@ -107,7 +107,7 @@ const HelpContainer = () => {
         transparent={true}
         visible={orderSupport}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
+          // Alert.alert('Modal has been closed.')
           setOrderSupport(false)
         }}
       >
@@ -118,7 +118,7 @@ const HelpContainer = () => {
         transparent={true}
         visible={billingIssues}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
+          // Alert.alert('Modal has been closed.')
           setBillingIssues(false)
         }}
       >
@@ -129,7 +129,7 @@ const HelpContainer = () => {
         transparent={true}
         visible={reportProblem}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
+          // Alert.alert('Modal has been closed.')
           setReportProblem(false)
         }}
       >

@@ -19,7 +19,7 @@ const Feedback = ({ onClose }) => {
   const images = [Images.howItWorks1, Images.howItWorks2, Images.howItWorks3]
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("1");
   const [items, setItems] = useState([
     { value: "1", label: "I would like to report a problem" },
     { value: "2", label: "I would like to rate  you" },
@@ -58,19 +58,19 @@ const Feedback = ({ onClose }) => {
               </View>
             </View>
 
-            <Text style={styles.description}>Select a topic</Text>
-              <DropDownPicker
-                style={[
-                  styles.dropDown, Common.shadow
-                ]}
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                disableBorderRadius={true}
-                setItems={setItems}
-              />
+            <Text style={[styles.description, styles.selectTopic]}>Select a topic</Text>
+            <DropDownPicker
+              style={[
+                styles.dropDown, Common.shadow, styles.items
+              ]}
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              disableBorderRadius={true}
+              setItems={setItems}
+            />
             <View style={[Common.shadow, Common.borderRadius]}>
               <TextInput
                 style={styles.textInput}
@@ -137,6 +137,9 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     fontSize: 48,
     marginTop: 30,
+  },
+  selectTopic: {
+    marginBottom: 5
   },
   closeButton: {
     position: 'absolute',

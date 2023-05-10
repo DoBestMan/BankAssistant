@@ -12,6 +12,8 @@ import { useTheme } from '@/Hooks'
 import { navigate } from '@/Navigators/utils'
 import { useState } from 'react'
 import Feedback from '@/Components/Feedback'
+import MyAddress from '@/Components/MyAddress'
+import PaymentMethods from '@/Components/PaymentMethods'
 
 const MENU_ITEMS = [
   'Profile',
@@ -27,8 +29,9 @@ const MENU_ITEMS = [
 
 const AccountContainer = () => {
   const { Layout, Images, Fonts, Gutters } = useTheme()
-  const [selectedTab, setSelectedTab] = useState(0)
   const [isFeedback, setIsFeedback] = useState(false)
+  const [isMyAddress, setIsMyAddress] = useState(false)
+  const [isPaymentMethods, setIsPaymentMethods] = useState(false)
 
   const onClick = (item) => {
     console.log(20230510,`account`,item);
@@ -36,8 +39,10 @@ const AccountContainer = () => {
       case 'Profile':
         break;
       case 'My Address':
+        setIsMyAddress(true);
         break;
       case 'Payment methods':
+        setIsPaymentMethods(true);
         break;
       case 'Refer a friend':
         break;
@@ -87,11 +92,35 @@ const AccountContainer = () => {
         transparent={true}
         visible={isFeedback}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
+          // Alert.alert('Modal has been closed.')
           setIsFeedback(!isFeedback)
         }}
       >
         <Feedback onClose={() => setIsFeedback(false)} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isMyAddress}
+        onRequestClose={() => {
+          // Alert.alert('Modal has been closed.')
+          setIsMyAddress(!isMyAddress)
+        }}
+      >
+        <MyAddress onClose={() => setIsMyAddress(false)} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isPaymentMethods}
+        onRequestClose={() => {
+          // Alert.alert('Modal has been closed.')
+          setIsPaymentMethods(!isPaymentMethods)
+        }}
+      >
+        <PaymentMethods onClose={() => setIsPaymentMethods(false)} />
       </Modal>
 
     </SafeAreaView>

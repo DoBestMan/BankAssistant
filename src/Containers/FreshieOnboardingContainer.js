@@ -19,7 +19,23 @@ import { ScrollView } from 'react-native-gesture-handler'
 const FreshieOnboardingContainer = () => {
   const { Layout, Images, Fonts, Colors, Gutters } = useTheme()
   const [currentStep, setCurrentStep] = useState(1)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPasswrd] = useState('')
+  const [phone, setPhone] = useState('')
+  const [address, setAddress] = useState('')
+  const [addressSecond, setAddressSecond] = useState('')
+  const [state, setState] = useState('')
+  const [zip, setZip] = useState('')
+  const [cardName, setCardName] = useState('')
+  const [cardInfo, setCardInfo] = useState('')
+  const [cardDate, setCardDate] = useState('')
+  const [cardCVC, setCardCVC] = useState('')
+
   const [isMale, setIsMale] = useState(false)
+
+  useEffect(()=> {console.log(20230510,email)},[email])
 
   return (
     <SafeAreaView style={[Layout.fill, styles.background]}>
@@ -67,6 +83,8 @@ const FreshieOnboardingContainer = () => {
             <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
               <TextInput
                 style={styles.textInput}
+                value={email}
+                onChangeText={setEmail}
                 placeholder="Enter your email"
               />
             </View>

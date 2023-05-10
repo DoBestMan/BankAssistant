@@ -22,6 +22,7 @@ const LoginContainer = () => {
   const [password, setPassword] = useState('')
 
   const onLogin = async () => {
+    // navigate('UserMain');
     if (email === '' || password === '') {
       Alert.alert('Error', 'Please enter email and password!', [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
@@ -41,7 +42,6 @@ const LoginContainer = () => {
     };
     const jwt_token = await fetch('https://freshfabrics.app/api/v1/login', requestOptions);
     console.log(`jwt_token`,jwt_token);
-
     
     if(jwt_token.status == 200)
     {
@@ -73,7 +73,7 @@ const LoginContainer = () => {
       </View>
 
       <View style={[Layout.fill, styles.container]}>
-        <Text style={[Fonts.textLarge, styles.title]}>Log in Topic</Text>
+        <Text style={[Fonts.textLarge, styles.title]}>Log in</Text>
 
         <View style={[Layout.fill, Gutters.largeBMargin]}>
           <Text style={[Gutters.smallBMargin, Gutters.largeTMargin]}>

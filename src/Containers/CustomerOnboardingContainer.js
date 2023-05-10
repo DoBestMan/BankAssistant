@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native'
 import { useState } from 'react'
 import { useTheme } from '@/Hooks'
@@ -18,27 +19,82 @@ import { ScrollView } from 'react-native-gesture-handler'
 const CustomerOnboardingContainer = () => {
   const { Layout, Images, Fonts, Common, Colors, Gutters } = useTheme()
   const [currentStep, setCurrentStep] = useState(1)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPasswrd] = useState('')
+  const [phone, setPhone] = useState('')
+  const [address, setAddress] = useState('')
+  const [addressSecond, setAddressSecond] = useState('')
+  const [state, setState] = useState('')
+  const [zip, setZip] = useState('')
+  const [cardName, setCardName] = useState('')
+  const [cardInfo, setCardInfo] = useState('')
+  const [cardDate, setCardDate] = useState('')
+  const [cardCVC, setCardCVC] = useState('')
+  const [verificationCode, setVerificationCode] = useState('')
+
+  const sendVerification = async () => {
+    const response = await fetch('https://freshfabrics.app/api/v1/register/customer/inputs/verify', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": email,
+        "firstName": firstName,
+        "lastName": lastName,
+        "phoneNumber": phone,
+        "password": password
+      }),
+    })
+    
+    if(response.status === 200){
+      setCurrentStep(5);
+    } else if(response.status === 400){
+      const user = await response.json();
+      console.log(20230510, response);
+      console.log(20230510, user);
+      Alert.alert(user.value);
+    }
+  }
 
   const onSignUp = async () => {
-    // const response = await fetch('http://192.168.1.63:8080/api/auth/register', {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     data: {
-    //       email: 'freshie@freshfabric.com',
-    //       firstName: 'Jane',
-    //       lastName: 'Doe',
-    //       password: 'password',
-    //       phonenumber: '+1234567890',
-    //     },
-    //   }),
-    // })
-
-    navigate('Login')
-  }
+    const response = await fetch('https://freshfabrics.app/api/v1/register/customer/inputs/verify', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            password: password,
+            phonenumber: phone,
+            address: address,
+            addressSecond: addressSecond,
+            state: state,
+            city: address,
+            zip: zip,
+            verificationCode: "723910",
+            cardName: cardName,
+            cardInfo: cardInfo,
+            cardDate: cardDate,
+            cardCVC: cardCVC,
+        }),
+      })
+      if(response.status === 200){
+        navigate('Login');
+      }
+      else if(response.status === 400){
+        const user = await response.json();
+        console.log(20230510, response);
+        console.log(20230510, user);
+        Alert.alert(user.value);
+      }
+    }
 
   return (
     <ScrollView
@@ -95,6 +151,8 @@ const CustomerOnboardingContainer = () => {
                 <TextInput
                   style={styles.textInput}
                   placeholder="Enter your first name"
+                  value={firstName}
+                  onChangeText={setFirstName}
                 />
               </View>
 
@@ -105,6 +163,8 @@ const CustomerOnboardingContainer = () => {
                 <TextInput
                   style={styles.textInput}
                   placeholder="Enter your last name"
+                  value={lastName}
+                  onChangeText={setLastName}
                 />
               </View>
 
@@ -115,6 +175,8 @@ const CustomerOnboardingContainer = () => {
                 <TextInput
                   style={styles.textInput}
                   placeholder="Enter your email"
+                  value={email}
+                  onChangeText={setEmail}
                 />
               </View>
 
@@ -126,6 +188,8 @@ const CustomerOnboardingContainer = () => {
                   style={styles.textInput}
                   placeholder="Enter your password"
                   secureTextEntry
+                  value={password}
+                  onChangeText={setPasswrd}
                 />
               </View>
 
@@ -141,7 +205,7 @@ const CustomerOnboardingContainer = () => {
           </View>
         )}
 
-        {currentStep === 2 && (
+        {currentStep === 4 && (
           <View style={[Layout.fill, styles.container]}>
             <Text style={[Fonts.textLarge, styles.title]}>Verify phone</Text>
             <Text style={[Fonts.textLarge, styles.title]}>number</Text>
@@ -153,12 +217,14 @@ const CustomerOnboardingContainer = () => {
                 <TextInput
                   style={[styles.textInput]}
                   placeholder="+1(000) 000-0000"
+                  value={phone}
+                  onChangeText={setPhone}
                 />
               </View>
 
               <TouchableOpacity
                 style={[styles.button, Layout.center]}
-                onPress={() => setCurrentStep(3)}
+                onPress={() => sendVerification()}
               >
                 <Text style={[Fonts.textRegular, styles.buttonText]}>
                   Send Verification Code
@@ -174,7 +240,50 @@ const CustomerOnboardingContainer = () => {
           </View>
         )}
 
-        {currentStep === 3 && (
+        {currentStep === 5 && (
+          <View style={[Layout.fill, styles.container]}>
+            <Text style={[Fonts.textLarge, styles.title]}>Enter Verification</Text>
+            <Text style={[Fonts.textLarge, styles.title]}>code</Text>
+
+            <View style={[Layout.fill, Gutters.largeBMargin]}>
+              <View
+                style={[Common.shadow, Common.borderRadius, Gutters.largeTMargin]}
+              >
+                <TextInput
+                  style={[styles.textInput]}
+                  placeholder="000-000"
+                  value={verificationCode}
+                  onChangeText={setVerificationCode}
+                />
+              </View>
+
+              <TouchableOpacity
+                style={[styles.button, Layout.center]}
+                onPress={() => onSignUp()}
+              >
+                <Text style={[Fonts.textRegular, styles.buttonText]}>
+                  Verify Code
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[ Layout.center]}
+                onPress={() => sendVerification()}
+              >
+                <Text style={[Fonts.textRegular, styles.buttonText, styles.resend]}>
+                  Resend Code
+                </Text>
+              </TouchableOpacity>
+              <Text style={[styles.descriptionText, Gutters.largeTMargin]}>
+                I agree to receive calls and text messages from Fresh Fabrics.
+                Please see the{' '}
+                <Text style={{ color: '#636363' }}>Terms of Service</Text> for
+                more information.
+              </Text>
+            </View>
+          </View>
+        )}
+
+        {currentStep === 2 && (
           <View style={[Layout.fill, styles.container]}>
             <Text style={[Fonts.textLarge, styles.title]}>Your delivery</Text>
             <Text style={[Fonts.textLarge, styles.title]}>address</Text>
@@ -187,6 +296,8 @@ const CustomerOnboardingContainer = () => {
                 <TextInput
                   style={[styles.textInput]}
                   placeholder="Enter your address"
+                  value={address}
+                  onChangeText={setAddress}
                 />
               </View>
 
@@ -200,6 +311,8 @@ const CustomerOnboardingContainer = () => {
                 <TextInput
                   style={[styles.textInput]}
                   placeholder="Address line 2"
+                  value={addressSecond}
+                  onChangeText={setAddressSecond}
                 />
               </View>
 
@@ -212,6 +325,8 @@ const CustomerOnboardingContainer = () => {
                     <TextInput
                       style={[styles.textInput]}
                       placeholder="Oklahoma"
+                      value={state}
+                      onChangeText={setState}
                     />
                   </View>
                 </View>
@@ -220,33 +335,34 @@ const CustomerOnboardingContainer = () => {
                     Zip code
                   </Text>
                   <View style={[Common.shadow, Common.borderRadius]}>
-                    <TextInput style={[styles.textInput]} placeholder="00000" />
+                    <TextInput style={[styles.textInput]} placeholder="00000" value={zip}
+                  onChangeText={setZip} />
                   </View>
                 </View>
               </View>
 
               <TouchableOpacity
                 style={[styles.button, Layout.center]}
-                onPress={() => setCurrentStep(4)}
+                onPress={() => setCurrentStep(3)}
               >
                 <Text style={[Fonts.textRegular, styles.buttonText]}>
                   Continue
                 </Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={[Layout.center, Gutters.regularTMargin]}
                 onPress={() => setCurrentStep(4)}
               >
                 <Text style={[Fonts.textSmall, { color: '#43C3EF' }]}>
                   Skip for now
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
         )}
 
-        {currentStep === 4 && (
+        {currentStep === 3 && (
           <View style={[Layout.fill, styles.container]}>
             <Text style={[Fonts.textLarge, styles.title]}>Your payment</Text>
             <Text style={[Fonts.textLarge, styles.title]}>method</Text>
@@ -256,7 +372,8 @@ const CustomerOnboardingContainer = () => {
                 Name on card
               </Text>
               <View style={[Common.shadow, Common.borderRadius]}>
-                <TextInput style={[styles.textInput]} placeholder="Enter here" />
+                <TextInput style={[styles.textInput]} value={cardName}
+                  onChangeText={setCardName} placeholder="Enter here" />
               </View>
 
               <Text style={[Gutters.largeTMargin]}>Card information</Text>
@@ -266,27 +383,40 @@ const CustomerOnboardingContainer = () => {
                 <TextInput
                   style={[styles.textInput]}
                   placeholder="1234 1234 1234 1234"
+                  value={cardInfo}
+                  onChangeText={setCardInfo}
                 />
               </View>
 
               <View style={[Layout.row, Gutters.regularTMargin]}>
                 <View style={[Layout.fill, Gutters.smallRMargin]}>
                   <View style={[Common.shadow, Common.borderRadius]}>
-                    <TextInput style={[styles.textInput]} placeholder="MM / YY" />
+                    <TextInput style={[styles.textInput]} placeholder="MM / YY" value={cardDate}
+                  onChangeText={setCardDate} />
                   </View>
                 </View>
                 <View style={[Layout.fill, Gutters.smallLMargin]}>
                   <View style={[Common.shadow, Common.borderRadius]}>
-                    <TextInput style={[styles.textInput]} placeholder="CVC" />
+                    <TextInput style={[styles.textInput]} placeholder="CVC" value={cardCVC}
+                  onChangeText={setCardCVC} />
                   </View>
                 </View>
               </View>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={[styles.button, Layout.center]}
                 onPress={onSignUp}
               >
                 <Text style={[Fonts.textRegular, styles.buttonText]}>Done</Text>
+              </TouchableOpacity> */}
+
+              <TouchableOpacity
+                style={[styles.button, Layout.center]}
+                onPress={() => setCurrentStep(4)}
+              >
+                <Text style={[Fonts.textRegular, styles.buttonText]}>
+                  Continue
+                </Text>
               </TouchableOpacity>
 
               {/* <TouchableOpacity
@@ -317,6 +447,10 @@ const styles = StyleSheet.create({
   backgroundImg: {
     width: '100%',
     marginBottom: 20,
+  },
+  resend: {
+    marginTop: 25,
+    color: '#43C3EF',
   },
   title: {
     color: '#43C3EF',

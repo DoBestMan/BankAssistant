@@ -255,7 +255,7 @@ const MyLaundry = ({ onClose }) => {
         )}
 
         {currentStep === 4 && (
-          <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
+          <View style={[styles.container]}>
             <Text style={styles.title}>Contact Info</Text>
 
             <Text style={Gutters.largeTMargin}>Address</Text>
@@ -381,13 +381,12 @@ const MyLaundry = ({ onClose }) => {
             >
               <Text style={styles.optionText}>Anytime</Text>
             </TouchableOpacity>
-          </ScrollView>
+          </View>
         )}
 
         {currentStep === 5 && (
-          <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
+          <View style={[styles.container]}>
             <Text style={styles.title}>Order details</Text>
-
             <View
               style={[
                 styles.inputWrapper,
@@ -535,11 +534,11 @@ const MyLaundry = ({ onClose }) => {
                 </TouchableOpacity>
               </View>
             </View>
-          </ScrollView>
+          </View>
         )}
 
         {currentStep === 6 && (
-          <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
+          <View style={[styles.container, { height: screenHeight - 300 }]}>
             <Text style={styles.title}>Checkout</Text>
 
             <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
@@ -661,10 +660,10 @@ const MyLaundry = ({ onClose }) => {
                 <Image style={{}} source={Images.apple_pay} resizeMode="cover" />
               </TouchableOpacity>
             </View>
-          </ScrollView>
+          </View>
         )}
 
-        {currentStep < 6 && (
+        {currentStep < 6 && currentStep > 0 && (
           <View style={[Layout.alignItemsCenter]}>
             <TouchableOpacity style={[styles.button , styles.continueBtn]} onPress={onNext}>
               <Text style={styles.buttonText}>

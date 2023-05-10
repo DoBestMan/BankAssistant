@@ -14,6 +14,7 @@ import { useState } from 'react'
 import Feedback from '@/Components/Feedback'
 import MyAddress from '@/Components/MyAddress'
 import PaymentMethods from '@/Components/PaymentMethods'
+import ReferFriend from '@/Components/ReferFriend'
 
 const MENU_ITEMS = [
   'Profile',
@@ -32,6 +33,7 @@ const AccountContainer = () => {
   const [isFeedback, setIsFeedback] = useState(false)
   const [isMyAddress, setIsMyAddress] = useState(false)
   const [isPaymentMethods, setIsPaymentMethods] = useState(false)
+  const [isReferFriend, setIsReferFriend] = useState(false)
 
   const onClick = (item) => {
     console.log(20230510,`account`,item);
@@ -45,6 +47,7 @@ const AccountContainer = () => {
         setIsPaymentMethods(true);
         break;
       case 'Refer a friend':
+        setIsReferFriend(true);
         break;
       case 'Rewards':
         break;
@@ -121,6 +124,18 @@ const AccountContainer = () => {
         }}
       >
         <PaymentMethods onClose={() => setIsPaymentMethods(false)} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isReferFriend}
+        onRequestClose={() => {
+          // Alert.alert('Modal has been closed.')
+          setIsReferFriend(!isReferFriend)
+        }}
+      >
+        <ReferFriend onClose={() => setIsReferFriend(false)} />
       </Modal>
 
     </SafeAreaView>

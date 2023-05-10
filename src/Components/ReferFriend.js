@@ -12,7 +12,7 @@ import { useTheme } from '@/Hooks'
 import { ScrollView } from 'react-native-gesture-handler'
 import DropDownPicker from "react-native-dropdown-picker";
 
-const MyAddress = ({ onClose }) => {
+const ReferFriend = ({ onClose }) => {
   const { Layout, Images, Common, Gutters } = useTheme()
 
   const onSubmit = () => {
@@ -27,48 +27,66 @@ const MyAddress = ({ onClose }) => {
             <Image source={Images.left_arrow} resizeMode="contain" />
           </TouchableOpacity>
         </View>
-            <Text style={styles.title}>My Address</Text>
+            <Text style={styles.title}>Refer a friend</Text>
             <Text style={[Gutters.smallBMargin, Gutters.largeTMargin, styles.description]}>
-                Address
-              </Text>
-              <View style={[Common.shadow, Common.borderRadius]}>
-                <TextInput
-                  style={[styles.textInput, styles.addressLine]}
-                  value='1120 North Main Street, Tulsa'
-                />
-              </View>
+            You’ll get $10 for each friend who orders. Only new customers are valid for the referral.
+            </Text>
+            <Text style={[Gutters.smallBMargin, Gutters.largeTMargin, styles.description]}>
+              Email address
+            </Text>
+            <View style={[Common.shadow, Common.borderRadius, styles.items]}>
+              <TextInput
+                style={[styles.textInput]}
+                placeholder="Your friend’s email address"
+              />
+            </View>
 
-              <View style={[Common.shadow, Common.borderRadius, styles.items]}>
-                <TextInput
-                  style={[styles.textInput, styles.addressLine]}
-                  placeholder="Address line 2"
-                />
-              </View>
-
-              <View style={[Layout.row, Gutters.regularTMargin]}>
-                <View style={[Layout.fill, Gutters.smallRMargin]}>
-                  <Text>State</Text>
-                  <View style={[styles.inputWrapper, Gutters.smallTMargin, Common.shadow, Common.borderRadius, styles.addressState]}>
-                    <TextInput style={[styles.textInput, styles.addressLine]} value="Oklahoma" />
-                  </View>
-                </View>
-
-                <View style={Layout.fill}>
-                  <Text>Zip Code</Text>
-                  <View style={[styles.inputWrapper, Gutters.smallTMargin, Common.shadow, Common.borderRadius, styles.addressState]}>
-                    <TextInput style={[styles.textInput, styles.addressLine]} value="74103" />
-                  </View>
-                </View>
-              </View>
-           
             <TouchableOpacity style={[styles.button]} onPress={onSubmit}>
-              <Text style={styles.buttonText}>Save changes</Text>
+              <Text style={styles.buttonText}>Send</Text>
             </TouchableOpacity>
+            <View style={[Gutters.regularTMargin, styles.border]} />
+            <Text style={[Gutters.smallBMargin, Gutters.largeTMargin, styles.description, styles.center]}>
+              or share to your friend by using these
+            </Text>
+            <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
+              <Image
+                style={[Gutters.smallVMargin, styles.socialLink]}
+                source={Images.facebook}
+                resizeMode="contain"
+              />
+              <Image
+                style={[Gutters.smallVMargin, styles.socialLink]}
+                source={Images.Twitter}
+                resizeMode="contain"
+              />
+              <Image
+                style={[Gutters.smallVMargin, styles.socialLink]}
+                source={Images.Whatsapp}
+                resizeMode="contain"
+              />
+              </View>
+            <View style={[styles.header, styles.footer, Layout.row, Layout.alignItemsCenter]}>
+              <Image
+                style={[Gutters.smallVMargin, styles.socialLink]}
+                source={Images.SMS}
+                resizeMode="contain"
+              />
+              <Image
+                style={[Gutters.smallVMargin, styles.socialLink]}
+                source={Images.Copylink}
+                resizeMode="contain"
+              />
+              <Image
+                style={[Gutters.smallVMargin, styles.socialLink]}
+                source={Images.Email}
+                resizeMode="contain"
+              />
+            </View>
       </SafeAreaView>
   )
 }
 
-export default MyAddress
+export default ReferFriend
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -77,11 +95,18 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'white',
   },
+  socialLink: {
+    marginHorizontal: 25,
+  },
+  center: {
+    textAlign: 'center',
+    marginTop: 20,
+  },
   topPg: {
     marginTop: 34,
   },
-  addressLine: {
-    paddingHorizontal: 15,
+  footer: {
+    marginTop: 40,
   },
   addressState: {
     width: '90%'
@@ -95,12 +120,12 @@ const styles = StyleSheet.create({
     position: 'relative',
     height: 30,
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 20,
   },
   title: {
     color: '#43C3EF',
     fontWeight: '900',
-    fontSize: 48,
+    fontSize: 36,
     marginTop: 30,
   },
   closeButton: {
@@ -161,6 +186,11 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  border: {
+    backgroundColor: '#E2E2E2',
+    marginTop: -25,
+    height: 1,
   },
   buttonText: {
     color: '#ffffff',

@@ -15,6 +15,7 @@ import Feedback from '@/Components/Feedback'
 import MyAddress from '@/Components/MyAddress'
 import PaymentMethods from '@/Components/PaymentMethods'
 import ReferFriend from '@/Components/ReferFriend'
+import Rewards from '@/Components/Rewards'
 
 const MENU_ITEMS = [
   'Profile',
@@ -34,6 +35,7 @@ const AccountContainer = () => {
   const [isMyAddress, setIsMyAddress] = useState(false)
   const [isPaymentMethods, setIsPaymentMethods] = useState(false)
   const [isReferFriend, setIsReferFriend] = useState(false)
+  const [isRewards, setIsRewards] = useState(false)
 
   const onClick = (item) => {
     console.log(20230510,`account`,item);
@@ -50,6 +52,7 @@ const AccountContainer = () => {
         setIsReferFriend(true);
         break;
       case 'Rewards':
+        setIsRewards(true);
         break;
       case 'Become a Freshie':
         break;
@@ -136,6 +139,18 @@ const AccountContainer = () => {
         }}
       >
         <ReferFriend onClose={() => setIsReferFriend(false)} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isRewards}
+        onRequestClose={() => {
+          // Alert.alert('Modal has been closed.')
+          setIsRewards(!isRewards)
+        }}
+      >
+        <Rewards onClose={() => setIsRewards(false)} />
       </Modal>
 
     </SafeAreaView>

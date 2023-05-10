@@ -592,7 +592,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    marginTop: 40,
+    marginTop: 20,
   },
   buttonText: {
     color: '#ffffff',

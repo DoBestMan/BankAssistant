@@ -11,7 +11,10 @@ import {
 } from 'react-native'
 import { useTheme } from '@/Hooks'
 import { HowItWorks } from '@/Components'
-
+import FaqCom from '@/Components/FaqCom'
+import OrderSupportCom from '@/Components/OrderSupportCom'
+import BillingIssuesCom from '@/Components/BillingIssuesCom'
+import ReportProblemCom from '@/Components/ReportProblemCom'
 const MENU_ITEMS = [
   'How it works',
   'Frequently asked questions',
@@ -23,10 +26,24 @@ const MENU_ITEMS = [
 const HelpContainer = () => {
   const { Layout, Images, Fonts, Gutters } = useTheme()
   const [modalVisible, setModalVisible] = useState(false)
+  const [faq, setFaq] = useState(false)
+  const [orderSupport, setOrderSupport] = useState(false)
+  const [billingIssues, setBillingIssues] = useState(false)
+  const [reportProblem, setReportProblem] = useState(false)
 
   const onClick = index => {
+    console.log(20230509,`^^^^^`,index);
+    console.log(20230509,index);
     if (index === 0) {
       setModalVisible(!modalVisible)
+    } else if(index === 1){
+      setFaq(true);
+    } else if(index === 2){
+      setOrderSupport(true);
+    } else if(index === 3){
+      setBillingIssues(true);
+    } else if(index === 4){
+      setReportProblem(true);
     }
   }
 
@@ -72,6 +89,51 @@ const HelpContainer = () => {
         }}
       >
         <HowItWorks onClose={() => setModalVisible(false)} />
+      </Modal>
+       <Modal
+        animationType="slide"
+        transparent={true}
+        visible={faq}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          setFaq(false)
+        }}
+      >
+        <FaqCom onClose={() => setFaq(false)} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={orderSupport}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          setOrderSupport(false)
+        }}
+      >
+        <OrderSupportCom onClose={() => setOrderSupport(false)} />
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={billingIssues}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          setBillingIssues(false)
+        }}
+      >
+        <BillingIssuesCom onClose={() => setBillingIssues(false)} />
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={reportProblem}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          setReportProblem(false)
+        }}
+      >
+        <ReportProblemCom onClose={() => setReportProblem(false)} />
       </Modal>
     </SafeAreaView>
   )

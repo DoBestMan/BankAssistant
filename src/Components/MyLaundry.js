@@ -46,968 +46,971 @@ const MyLaundry = ({ onClose }) => {
   }
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
-        <TouchableOpacity
-          style={styles.prevButton}
-          onPress={() => setCurrentStep(currentStep - 1)}
-        >
-          <Image source={Images.left_arrow} resizeMode="contain" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Do my laundry</Text>
-        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-          <Image source={Images.close} resizeMode="contain" />
-        </TouchableOpacity>
-        <View style={styles.progressBar}>
-          <View style={[styles.progress, { width: `${20 * currentStep}%` }]} />
-        </View>
-      </View>
-
-      {currentStep === 1 && (
-        <View style={[styles.container, Layout.fill]}>
-          <Text style={styles.title}>Bags</Text>
-          <Text style={styles.description}>
-            Number of bags/hampers to pickup
-          </Text>
-          <View
-            style={[
-              Gutters.largeTMargin,
-              Layout.row,
-              Layout.justifyContentCenter,
-            ]}
+    <ScrollView>
+      <SafeAreaView style={styles.wrapper}>
+        <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
+          <TouchableOpacity
+            style={styles.prevButton}
+            onPress={() => setCurrentStep(currentStep - 1)}
           >
-            <TouchableOpacity
-              onPress={() => {
-                setBagCounts(bagCount - 1)
-              }}
-            >
-              <Image source={Images.remove} resizeMode="contain" />
-            </TouchableOpacity>
-            <Text style={styles.bags}>{bagCount} Bags</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setBagCounts(bagCount + 1)
-              }}
-            >
-              <Image source={Images.add} resizeMode="contain" />
-            </TouchableOpacity>
+            <Image source={Images.left_arrow} resizeMode="contain" />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Do my laundry</Text>
+          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+            <Image source={Images.close} resizeMode="contain" />
+          </TouchableOpacity>
+          <View style={styles.progressBar}>
+            <View style={[styles.progress, { width: `${20 * currentStep}%` }]} />
           </View>
+        </View>
 
-          <View style={styles.optionList}>
-            {options.map((option, index) => (
+        {currentStep === 1 && (
+          <View style={[styles.container, Layout.fill]}>
+            <Text style={styles.title}>Bags</Text>
+            <Text style={styles.description}>
+              Number of bags/hampers to pickup
+            </Text>
+            <View
+              style={[
+                Gutters.largeTMargin,
+                Layout.row,
+                Layout.justifyContentCenter,
+              ]}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  setBagCounts(bagCount - 1)
+                }}
+              >
+                <Image source={Images.remove} resizeMode="contain" />
+              </TouchableOpacity>
+              <Text style={styles.bags}>{bagCount} Bags</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setBagCounts(bagCount + 1)
+                }}
+              >
+                <Image source={Images.add} resizeMode="contain" />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.optionList}>
+              {options.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.optionButton,
+                    index === bagSize && styles.boxSelected,
+                  ]}
+                  onPress={() => setBagSize(index)}
+                >
+                  <Text style={styles.optionText}>{option}</Text>
+                  {bagSize === index && (
+                    <Image
+                      style={styles.check}
+                      source={Images.checked}
+                      resizeMode="contain"
+                    />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            <Text style={styles.description1}>
+              For anything over 150lbs, please
+            </Text>
+            <Text style={styles.contact}>contact our customer service</Text>
+          </View>
+        )}
+
+        {currentStep === 2 && (
+          <View style={[styles.container, Layout.fill]}>
+            <Text style={styles.title}>Preferences</Text>
+            <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
+              Detergent choice
+            </Text>
+
+            <View style={[Layout.alignItemsCenter]}>
               <TouchableOpacity
                 style={[
-                  styles.optionButton,
-                  index === bagSize && styles.boxSelected,
+                  styles.preferenceButton,
+                  preference === 0 && styles.boxSelected,
                 ]}
-                onPress={() => setBagSize(index)}
+                onPress={() => setPreference(0)}
               >
-                <Text style={styles.optionText}>{option}</Text>
-                {bagSize === index && (
+                <Text style={styles.preferenceText}>High-efficiency</Text>
+                <Text style={styles.description}>
+                  A specially formulated solution for washing clothes
+                </Text>
+                {preference === 0 && (
                   <Image
-                    style={styles.check}
+                    style={[styles.check, { top: 10 }]}
                     source={Images.checked}
                     resizeMode="contain"
                   />
                 )}
               </TouchableOpacity>
-            ))}
-          </View>
 
-          <Text style={styles.description1}>
-            For anything over 150lbs, please
-          </Text>
-          <Text style={styles.contact}>contact our customer service</Text>
-        </View>
-      )}
-
-      {currentStep === 2 && (
-        <View style={[styles.container, Layout.fill]}>
-          <Text style={styles.title}>Preferences</Text>
-          <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
-            Detergent choice
-          </Text>
-
-          <View style={[Layout.alignItemsCenter]}>
-            <TouchableOpacity
-              style={[
-                styles.preferenceButton,
-                preference === 0 && styles.boxSelected,
-              ]}
-              onPress={() => setPreference(0)}
-            >
-              <Text style={styles.preferenceText}>High-efficiency</Text>
-              <Text style={styles.description}>
-                A specially formulated solution for washing clothes
-              </Text>
-              {preference === 0 && (
-                <Image
-                  style={[styles.check, { top: 10 }]}
-                  source={Images.checked}
-                  resizeMode="contain"
-                />
-              )}
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.preferenceButton,
-                preference === 1 && styles.boxSelected,
-              ]}
-              onPress={() => setPreference(1)}
-            >
-              <Text style={styles.preferenceText}>Sensitive</Text>
-              <Text style={styles.description}>
-                A delicate wash detergent for washing clothes
-              </Text>
-              {preference === 1 && (
-                <Image
-                  style={[styles.check, { top: 10 }]}
-                  source={Images.checked}
-                  resizeMode="contain"
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-
-          <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
-            Special instructions
-          </Text>
-          <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-            <TextInput
-              editable
-              multiline
-              numberOfLines={4}
-              textAlignVertical="top"
-              style={styles.multiLineTextInput}
-              placeholder="Type your instructions here"
-            />
-          </View>
-        </View>
-      )}
-
-      {currentStep === 3 && (
-        <View style={[styles.container, Layout.fill]}>
-          <Text style={styles.title}>Insurance</Text>
-          <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
-            Upgrade your coverage plan?
-          </Text>
-          <Text style={styles.description}>
-            Additional protection against damage/loss.
-          </Text>
-
-          <View style={[Layout.alignItemsCenter, Gutters.regularTMargin]}>
-            <TouchableOpacity
-              style={[
-                styles.preferenceButton,
-                insurance === 0 && styles.boxSelected,
-                {
-                  height: 'auto',
-                },
-              ]}
-              onPress={() => setInsurance(0)}
-            >
-              <Text style={styles.preferenceText}>Basic</Text>
-              <Text style={{ fontSize: 12, marginTop: 10 }}>
-                {'\u2022'} Up to $35 per garment
-              </Text>
-              <Text style={{ fontSize: 12 }}>
-                {'\u2022'} Maximum $200 per order
-              </Text>
-              <Text style={{ fontSize: 12, marginTop: 10, color: 'gray' }}>
-                Coverage valid for 48 hours after delivery.
-              </Text>
-              <Text style={{ fontSize: 12, color: 'gray' }}>
-                Subject to our{' '}
-                <Text style={{ color: 'black' }}>Temrs of Services</Text>
-              </Text>
-              {insurance === 0 && (
-                <Image
-                  style={[styles.check, { top: 10 }]}
-                  source={Images.checked}
-                  resizeMode="contain"
-                />
-              )}
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.preferenceButton,
-                insurance === 1 && styles.boxSelected,
-                {
-                  height: 'auto',
-                },
-              ]}
-              onPress={() => setInsurance(1)}
-            >
-              <Text style={styles.preferenceText}>Premium</Text>
-              {insurance === 1 && (
-                <Image
-                  style={[styles.check, { top: 10 }]}
-                  source={Images.checked}
-                  resizeMode="contain"
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-
-      {currentStep === 4 && (
-        <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
-          <Text style={styles.title}>Contact Info</Text>
-
-          <Text style={Gutters.largeTMargin}>Address</Text>
-          <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-            <TextInput
-              style={[styles.textInput]}
-              value="1120 North Main Street, Tulsa"
-            />
-          </View>
-          <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-            <TextInput
-              style={[styles.textInput]}
-              placeholder="Address line 2"
-            />
-          </View>
-
-          <View style={[Layout.row, Gutters.regularTMargin]}>
-            <View style={[Layout.fill, Gutters.smallRMargin]}>
-              <Text>State</Text>
-              <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-                <TextInput style={[styles.textInput]} value="Oklahoma" />
-              </View>
-            </View>
-
-            <View style={Layout.fill}>
-              <Text>Zip Code</Text>
-              <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-                <TextInput style={[styles.textInput]} value="74103" />
-              </View>
-            </View>
-          </View>
-
-          <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
-            Pickup spot
-          </Text>
-
-          <View style={Layout.alignItemsCenter}>
-            <TouchableOpacity
-              style={[
-                styles.preferenceButton,
-                pickupSpot === 0 && styles.boxSelected,
-                {
-                  height: 'auto',
-                },
-              ]}
-              onPress={() => setPickupSpot(0)}
-            >
-              <Text style={styles.preferenceText}>Simple</Text>
-              <Text style={{ fontSize: 12, color: 'gray', marginTop: 10 }}>
-                Put your laundry out for pick up in a spot that’s easily
-                accessible for our Freshie.
-              </Text>
-              <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-                <TextInput style={[styles.textInput]} value="Front door" />
-              </View>
-              <Text style={{ fontSize: 12, color: '#43C3EF', marginTop: 10 }}>
-                Add additional instruction
-              </Text>
-              {pickupSpot === 0 && (
-                <Image
-                  style={[styles.check, { top: 10 }]}
-                  source={Images.checked}
-                  resizeMode="contain"
-                />
-              )}
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.preferenceButton,
-                pickupSpot === 1 && styles.boxSelected,
-                {
-                  height: 'auto',
-                },
-              ]}
-              onPress={() => setPickupSpot(1)}
-            >
-              <Text style={styles.preferenceText}>Custom</Text>
-              <Text style={{ fontSize: 12, color: 'gray', marginTop: 10 }}>
-                Can't leave your laundry out for pickup?
-              </Text>
-              <Text style={{ fontSize: 12, color: 'gray' }}>
-                No problem, we can accomodate you.
-              </Text>
-              {pickupSpot === 1 && (
-                <Image
-                  style={[styles.check, { top: 10 }]}
-                  source={Images.checked}
-                  resizeMode="contain"
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-
-          <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
-            Preferred pickup time
-          </Text>
-
-          <TouchableOpacity
-            style={[
-              Gutters.regularTMargin,
-              styles.optionButton,
-              styles.boxSelected,
-            ]}
-          >
-            <Text style={styles.optionText}>08:00 am - 11:00 am</Text>
-
-            <Image
-              style={styles.check}
-              source={Images.checked}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={[Gutters.smallTMargin, styles.optionButton]}>
-            <Text style={styles.optionText}>01:00 pm - 4:00 pm</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              Gutters.smallTMargin,
-              Gutters.regularBMargin,
-              styles.optionButton,
-            ]}
-          >
-            <Text style={styles.optionText}>Anytime</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      )}
-
-      {currentStep === 5 && (
-        <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
-          <Text style={styles.title}>Order details</Text>
-
-          <View
-            style={[
-              styles.inputWrapper,
-              styles.preferenceButton,
-              { height: 'auto' },
-            ]}
-          >
-            <View
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                Layout.justifyContentBetween,
-              ]}
-            >
-              <Text style={styles.preferenceText}>2 Bags</Text>
-              <TouchableOpacity>
-                <Text style={{ color: '#43C3EF' }}>Edit</Text>
+              <TouchableOpacity
+                style={[
+                  styles.preferenceButton,
+                  preference === 1 && styles.boxSelected,
+                ]}
+                onPress={() => setPreference(1)}
+              >
+                <Text style={styles.preferenceText}>Sensitive</Text>
+                <Text style={styles.description}>
+                  A delicate wash detergent for washing clothes
+                </Text>
+                {preference === 1 && (
+                  <Image
+                    style={[styles.check, { top: 10 }]}
+                    source={Images.checked}
+                    resizeMode="contain"
+                  />
+                )}
               </TouchableOpacity>
             </View>
-            <Text style={Gutters.regularTMargin}>Medium size(46-60lbs)</Text>
+
+            <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
+              Special instructions
+            </Text>
+            <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+              <TextInput
+                editable
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+                style={styles.multiLineTextInput}
+                placeholder="Type your instructions here"
+              />
+            </View>
           </View>
+        )}
 
-          <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
-            Preferences
-          </Text>
+        {currentStep === 3 && (
+          <View style={[styles.container, Layout.fill]}>
+            <Text style={styles.title}>Insurance</Text>
+            <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
+              Upgrade your coverage plan?
+            </Text>
+            <Text style={styles.description}>
+              Additional protection against damage/loss.
+            </Text>
 
-          <View
-            style={[
-              styles.inputWrapper,
-              styles.preferenceButton,
-              { height: 'auto' },
-            ]}
-          >
-            <View
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                Layout.justifyContentBetween,
-                {
-                  paddingBottom: 10,
-                  borderBottomColor: '#E2E2E2',
-                  borderBottomWidth: 1,
-                },
-                ,
-              ]}
-            >
-              <Text style={styles.preferenceText}>High-efficiency</Text>
-              <TouchableOpacity>
-                <Text style={{ color: '#43C3EF' }}>Edit</Text>
+            <View style={[Layout.alignItemsCenter, Gutters.regularTMargin]}>
+              <TouchableOpacity
+                style={[
+                  styles.preferenceButton,
+                  insurance === 0 && styles.boxSelected,
+                  {
+                    height: 'auto',
+                  },
+                ]}
+                onPress={() => setInsurance(0)}
+              >
+                <Text style={styles.preferenceText}>Basic</Text>
+                <Text style={{ fontSize: 12, marginTop: 10 }}>
+                  {'\u2022'} Up to $35 per garment
+                </Text>
+                <Text style={{ fontSize: 12 }}>
+                  {'\u2022'} Maximum $200 per order
+                </Text>
+                <Text style={{ fontSize: 12, marginTop: 10, color: 'gray' }}>
+                  Coverage valid for 48 hours after delivery.
+                </Text>
+                <Text style={{ fontSize: 12, color: 'gray' }}>
+                  Subject to our{' '}
+                  <Text style={{ color: 'black' }}>Temrs of Services</Text>
+                </Text>
+                {insurance === 0 && (
+                  <Image
+                    style={[styles.check, { top: 10 }]}
+                    source={Images.checked}
+                    resizeMode="contain"
+                  />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.preferenceButton,
+                  insurance === 1 && styles.boxSelected,
+                  {
+                    height: 'auto',
+                  },
+                ]}
+                onPress={() => setInsurance(1)}
+              >
+                <Text style={styles.preferenceText}>Premium</Text>
+                {insurance === 1 && (
+                  <Image
+                    style={[styles.check, { top: 10 }]}
+                    source={Images.checked}
+                    resizeMode="contain"
+                  />
+                )}
               </TouchableOpacity>
             </View>
-            <Text
+          </View>
+        )}
+
+        {currentStep === 4 && (
+          <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
+            <Text style={styles.title}>Contact Info</Text>
+
+            <Text style={Gutters.largeTMargin}>Address</Text>
+            <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+              <TextInput
+                style={[styles.textInput]}
+                value="1120 North Main Street, Tulsa"
+              />
+            </View>
+            <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+              <TextInput
+                style={[styles.textInput]}
+                placeholder="Address line 2"
+              />
+            </View>
+
+            <View style={[Layout.row, Gutters.regularTMargin]}>
+              <View style={[Layout.fill, Gutters.smallRMargin]}>
+                <Text>State</Text>
+                <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+                  <TextInput style={[styles.textInput]} value="Oklahoma" />
+                </View>
+              </View>
+
+              <View style={Layout.fill}>
+                <Text>Zip Code</Text>
+                <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+                  <TextInput style={[styles.textInput]} value="74103" />
+                </View>
+              </View>
+            </View>
+
+            <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
+              Pickup spot
+            </Text>
+
+            <View style={Layout.alignItemsCenter}>
+              <TouchableOpacity
+                style={[
+                  styles.preferenceButton,
+                  pickupSpot === 0 && styles.boxSelected,
+                  {
+                    height: 'auto',
+                  },
+                ]}
+                onPress={() => setPickupSpot(0)}
+              >
+                <Text style={styles.preferenceText}>Simple</Text>
+                <Text style={{ fontSize: 12, color: 'gray', marginTop: 10 }}>
+                  Put your laundry out for pick up in a spot that’s easily
+                  accessible for our Freshie.
+                </Text>
+                <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+                  <TextInput style={[styles.textInput]} value="Front door" />
+                </View>
+                <Text style={{ fontSize: 12, color: '#43C3EF', marginTop: 10 }}>
+                  Add additional instruction
+                </Text>
+                {pickupSpot === 0 && (
+                  <Image
+                    style={[styles.check, { top: 10 }]}
+                    source={Images.checked}
+                    resizeMode="contain"
+                  />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.preferenceButton,
+                  pickupSpot === 1 && styles.boxSelected,
+                  {
+                    height: 'auto',
+                  },
+                ]}
+                onPress={() => setPickupSpot(1)}
+              >
+                <Text style={styles.preferenceText}>Custom</Text>
+                <Text style={{ fontSize: 12, color: 'gray', marginTop: 10 }}>
+                  Can't leave your laundry out for pickup?
+                </Text>
+                <Text style={{ fontSize: 12, color: 'gray' }}>
+                  No problem, we can accomodate you.
+                </Text>
+                {pickupSpot === 1 && (
+                  <Image
+                    style={[styles.check, { top: 10 }]}
+                    source={Images.checked}
+                    resizeMode="contain"
+                  />
+                )}
+              </TouchableOpacity>
+            </View>
+
+            <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
+              Preferred pickup time
+            </Text>
+
+            <TouchableOpacity
               style={[
                 Gutters.regularTMargin,
-                { color: '#A7A7A7', fontSize: 12 },
+                styles.optionButton,
+                styles.boxSelected,
               ]}
             >
-              Special instructions:
-            </Text>
-            <Text style={[Gutters.smallTMargin, { fontSize: 12 }]}>
-              No dry please
-            </Text>
-          </View>
+              <Text style={styles.optionText}>08:00 am - 11:00 am</Text>
 
-          <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
-            Insurance
-          </Text>
-          <View
-            style={[
-              styles.inputWrapper,
-              styles.preferenceButton,
-              { height: 'auto' },
-            ]}
-          >
-            <View
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                Layout.justifyContentBetween,
-              ]}
-            >
-              <Text style={styles.preferenceText}>Basic</Text>
-              <TouchableOpacity>
-                <Text style={{ color: '#43C3EF' }}>Edit</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
-            Pickup address
-          </Text>
-          <View
-            style={[
-              styles.inputWrapper,
-              styles.preferenceButton,
-              { height: 'auto' },
-            ]}
-          >
-            <View
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                Layout.justifyContentBetween,
-                {
-                  paddingBottom: 10,
-                  borderBottomColor: '#E2E2E2',
-                  borderBottomWidth: 1,
-                },
-                ,
-              ]}
-            >
-              <Text style={{ fontSize: 12 }}>
-                1120 North Main Street, Tulsa, OK 74103
-              </Text>
-              <TouchableOpacity>
-                <Text style={{ color: '#43C3EF' }}>Edit</Text>
-              </TouchableOpacity>
-            </View>
-
-            <Text style={[Gutters.regularTMargin, { fontSize: 12 }]}>
-              <Text style={{ fontWeight: '700' }}>Pickup spot</Text>: Front door
-            </Text>
-          </View>
-
-          <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
-            Pickup pickup time
-          </Text>
-          <View
-            style={[
-              styles.inputWrapper,
-              styles.preferenceButton,
-              { height: 'auto' },
-            ]}
-          >
-            <View
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                Layout.justifyContentBetween,
-              ]}
-            >
-              <Text style={{ fontSize: 12 }}>01:00 pm - 4:00 pm</Text>
-              <TouchableOpacity>
-                <Text style={{ color: '#43C3EF' }}>Edit</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </ScrollView>
-      )}
-
-      {currentStep === 6 && (
-        <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
-          <Text style={styles.title}>Checkout</Text>
-
-          <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
-            Order summary
-          </Text>
-
-          <View
-            style={[
-              styles.inputWrapper,
-              styles.preferenceButton,
-              { height: 'auto' },
-            ]}
-          >
-            <View
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                Layout.justifyContentBetween,
-                {
-                  paddingBottom: 10,
-                  borderBottomColor: '#E2E2E2',
-                  borderBottomWidth: 1,
-                },
-              ]}
-            >
-              <Text style={{ color: '#636363' }}>Pre-Auth:</Text>
-              <TouchableOpacity>
-                <Text style={{ color: '#0E0E0E', fontWeight: '700' }}>
-                  $22.00
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                Layout.justifyContentBetween,
-                {
-                  paddingTop: 10,
-                },
-              ]}
-            >
-              <Text style={{ color: '#636363' }}>Amount Charged:</Text>
-              <TouchableOpacity>
-                <Text style={{ color: '#0E0E0E', fontWeight: '700' }}>
-                  $0.00
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View
-            style={[
-              Layout.row,
-              Layout.alignItemsCenter,
-              { justifyContent: 'flex-end', marginTop: 20 },
-            ]}
-          >
-            <Image style={{}} source={Images.info} resizeMode="cover" />
-            <Text style={{ color: '#43C3EF', marginLeft: 5 }}>
-              What is Pre-Auth fee?
-            </Text>
-          </View>
-
-          <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
-            Payment Method
-          </Text>
-
-          <Text style={Gutters.regularTMargin}>Name on card</Text>
-          <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-            <TextInput style={[styles.textInput]} placeholder="Enter here" />
-          </View>
-
-          <Text style={Gutters.regularTMargin}>Card information</Text>
-          <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-            <TextInput
-              style={[styles.textInput]}
-              placeholder="1234 1234 1234 1234"
-            />
-          </View>
-
-          <View style={[Layout.row, Gutters.smallTMargin]}>
-            <View style={[Layout.fill, Gutters.smallRMargin]}>
-              <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-                <TextInput style={[styles.textInput]} placeholder="MM / YY" />
-              </View>
-            </View>
-
-            <View style={Layout.fill}>
-              <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
-                <TextInput style={[styles.textInput]} placeholder="CVC" />
-              </View>
-            </View>
-          </View>
-
-          <View style={Gutters.largeTMargin}>
-            <TouchableOpacity
-              style={[styles.button, { width: '100%' }]}
-              onPress={() => setShowSuccessModal(true)}
-            >
-              <Text style={styles.buttonText}>Pay now</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View>
-            <TouchableOpacity
-              style={[
-                Layout.row,
-                Layout.alignItemsCenter,
-                styles.button,
-                { width: '100%', backgroundColor: '#000' },
-              ]}
-              onPress={() => setShowSuccessModal(true)}
-            >
-              <Text style={[styles.buttonText, { color: '#fff' }]}>
-                Pay with
-              </Text>
-              <Image style={{}} source={Images.apple_pay} resizeMode="cover" />
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      )}
-
-      {currentStep < 6 && (
-        <View style={[Layout.alignItemsCenter]}>
-          <TouchableOpacity style={styles.button} onPress={onNext}>
-            <Text style={styles.buttonText}>
-              {currentStep === 5 ? 'Confirm order' : 'Continue'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      <Modal animationType="slide" visible={showSubscriptionModal}>
-        <View style={[styles.modalContainer, Layout.fill]}>
-          <TouchableOpacity
-            style={[styles.closeButton, { left: -15, top: 15 }]}
-            onPress={() => setShowSubscriptionModal(false)}
-          >
-            <Image source={Images.close} resizeMode="contain" />
-          </TouchableOpacity>
-
-          <Text
-            style={{
-              marginTop: 50,
-              textAlign: 'center',
-              fontSize: 30,
-              fontWeight: '700',
-              color: '#43C3EF',
-            }}
-          >
-            Join our Monthly Plan to save more!
-          </Text>
-          <ScrollView horizontal contentContainerStyle={Gutters.largeVPadding}>
-            <View style={styles.planCard}>
               <Image
-                style={styles.markImage}
-                source={Images.best_value}
+                style={styles.check}
+                source={Images.checked}
                 resizeMode="contain"
               />
-              <Text style={styles.planTitle}>Gold Plan</Text>
-              <View style={[Layout.row, styles.alignItemsEnd]}>
-                <View style={[Gutters.smallTMargin, Layout.row]}>
-                  <Text
-                    style={[
-                      Gutters.regularTMargin,
-                      styles.price,
-                      styles.priceSymbol,
-                    ]}
-                  >
-                    $
-                  </Text>
-                  <Text style={[styles.priceNumber, styles.price]}>111</Text>
-                </View>
-                <Text style={[Gutters.regularLMargin, Gutters.regularBMargin]}>
-                  Every month
-                </Text>
-              </View>
+            </TouchableOpacity>
 
-              <View style={[Gutters.regularTMargin, styles.border]} />
+            <TouchableOpacity style={[Gutters.smallTMargin, styles.optionButton]}>
+              <Text style={styles.optionText}>01:00 pm - 4:00 pm</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                Gutters.smallTMargin,
+                Gutters.regularBMargin,
+                styles.optionButton,
+              ]}
+            >
+              <Text style={styles.optionText}>Anytime</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        )}
+
+        {currentStep === 5 && (
+          <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
+            <Text style={styles.title}>Order details</Text>
+
+            <View
+              style={[
+                styles.inputWrapper,
+                styles.preferenceButton,
+                { height: 'auto' },
+              ]}
+            >
+              <View
+                style={[
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  Layout.justifyContentBetween,
+                ]}
+              >
+                <Text style={styles.preferenceText}>2 Bags</Text>
+                <TouchableOpacity>
+                  <Text style={{ color: '#43C3EF' }}>Edit</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={Gutters.regularTMargin}>Medium size(46-60lbs)</Text>
+            </View>
+
+            <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
+              Preferences
+            </Text>
+
+            <View
+              style={[
+                styles.inputWrapper,
+                styles.preferenceButton,
+                { height: 'auto' },
+              ]}
+            >
+              <View
+                style={[
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  Layout.justifyContentBetween,
+                  {
+                    paddingBottom: 10,
+                    borderBottomColor: '#E2E2E2',
+                    borderBottomWidth: 1,
+                  },
+                  ,
+                ]}
+              >
+                <Text style={styles.preferenceText}>High-efficiency</Text>
+                <TouchableOpacity>
+                  <Text style={{ color: '#43C3EF' }}>Edit</Text>
+                </TouchableOpacity>
+              </View>
               <Text
                 style={[
                   Gutters.regularTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
+                  { color: '#A7A7A7', fontSize: 12 },
                 ]}
               >
-                {'\u2022'} Perfect for a family
+                Special instructions:
               </Text>
-              <Text
+              <Text style={[Gutters.smallTMargin, { fontSize: 12 }]}>
+                No dry please
+              </Text>
+            </View>
+
+            <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
+              Insurance
+            </Text>
+            <View
+              style={[
+                styles.inputWrapper,
+                styles.preferenceButton,
+                { height: 'auto' },
+              ]}
+            >
+              <View
                 style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  Layout.justifyContentBetween,
                 ]}
               >
-                {'\u2022'} Valid for 3 months
-              </Text>
-              <Text
+                <Text style={styles.preferenceText}>Basic</Text>
+                <TouchableOpacity>
+                  <Text style={{ color: '#43C3EF' }}>Edit</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
+              Pickup address
+            </Text>
+            <View
+              style={[
+                styles.inputWrapper,
+                styles.preferenceButton,
+                { height: 'auto' },
+              ]}
+            >
+              <View
                 style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  Layout.justifyContentBetween,
+                  {
+                    paddingBottom: 10,
+                    borderBottomColor: '#E2E2E2',
+                    borderBottomWidth: 1,
+                  },
+                  ,
                 ]}
               >
-                {'\u2022'} 2 pick ups
+                <Text style={{ fontSize: 12 }}>
+                  1120 North Main Street, Tulsa, OK 74103
+                </Text>
+                <TouchableOpacity>
+                  <Text style={{ color: '#43C3EF' }}>Edit</Text>
+                </TouchableOpacity>
+              </View>
+
+              <Text style={[Gutters.regularTMargin, { fontSize: 12 }]}>
+                <Text style={{ fontWeight: '700' }}>Pickup spot</Text>: Front door
               </Text>
-              <Text
+            </View>
+
+            <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
+              Pickup pickup time
+            </Text>
+            <View
+              style={[
+                styles.inputWrapper,
+                styles.preferenceButton,
+                { height: 'auto' },
+              ]}
+            >
+              <View
                 style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  Layout.justifyContentBetween,
                 ]}
               >
-                {'\u2022'} Free detergent
-              </Text>
-              <Text
+                <Text style={{ fontSize: 12 }}>01:00 pm - 4:00 pm</Text>
+                <TouchableOpacity>
+                  <Text style={{ color: '#43C3EF' }}>Edit</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
+        )}
+
+        {currentStep === 6 && (
+          <ScrollView style={[styles.container, { height: screenHeight - 300 }]}>
+            <Text style={styles.title}>Checkout</Text>
+
+            <Text style={[Gutters.regularTMargin, Fonts.textSmall]}>
+              Order summary
+            </Text>
+
+            <View
+              style={[
+                styles.inputWrapper,
+                styles.preferenceButton,
+                { height: 'auto' },
+              ]}
+            >
+              <View
                 style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  Layout.justifyContentBetween,
+                  {
+                    paddingBottom: 10,
+                    borderBottomColor: '#E2E2E2',
+                    borderBottomWidth: 1,
+                  },
                 ]}
               >
-                {'\u2022'} 80lbs per month
+                <Text style={{ color: '#636363' }}>Pre-Auth:</Text>
+                <TouchableOpacity>
+                  <Text style={{ color: '#0E0E0E', fontWeight: '700' }}>
+                    $22.00
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View
+                style={[
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  Layout.justifyContentBetween,
+                  {
+                    paddingTop: 10,
+                  },
+                ]}
+              >
+                <Text style={{ color: '#636363' }}>Amount Charged:</Text>
+                <TouchableOpacity>
+                  <Text style={{ color: '#0E0E0E', fontWeight: '700' }}>
+                    $0.00
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View
+              style={[
+                Layout.row,
+                Layout.alignItemsCenter,
+                { justifyContent: 'flex-end', marginTop: 20 },
+              ]}
+            >
+              <Image style={{}} source={Images.info} resizeMode="cover" />
+              <Text style={{ color: '#43C3EF', marginLeft: 5 }}>
+                What is Pre-Auth fee?
               </Text>
-              <Text style={[Gutters.regularTMargin, styles.saveValue]}>
-                Save $28.00
-              </Text>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Select and pay</Text>
+            </View>
+
+            <Text style={[Gutters.largeTMargin, Fonts.textSmall]}>
+              Payment Method
+            </Text>
+
+            <Text style={Gutters.regularTMargin}>Name on card</Text>
+            <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+              <TextInput style={[styles.textInput]} placeholder="Enter here" />
+            </View>
+
+            <Text style={Gutters.regularTMargin}>Card information</Text>
+            <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+              <TextInput
+                style={[styles.textInput]}
+                placeholder="1234 1234 1234 1234"
+              />
+            </View>
+
+            <View style={[Layout.row, Gutters.smallTMargin]}>
+              <View style={[Layout.fill, Gutters.smallRMargin]}>
+                <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+                  <TextInput style={[styles.textInput]} placeholder="MM / YY" />
+                </View>
+              </View>
+
+              <View style={Layout.fill}>
+                <View style={[styles.inputWrapper, Gutters.smallTMargin]}>
+                  <TextInput style={[styles.textInput]} placeholder="CVC" />
+                </View>
+              </View>
+            </View>
+
+            <View style={Gutters.largeTMargin}>
+              <TouchableOpacity
+                style={[styles.button, { width: '100%' }]}
+                onPress={() => setShowSuccessModal(true)}
+              >
+                <Text style={styles.buttonText}>Pay now</Text>
               </TouchableOpacity>
             </View>
 
-            <View style={[Gutters.largeLMargin, styles.planCard]}>
-              <Text style={styles.planTitle}>Black Plan</Text>
-              <View style={[Layout.row, styles.alignItemsEnd]}>
-                <View style={[Gutters.smallTMargin, Layout.row]}>
-                  <Text
-                    style={[
-                      Gutters.regularTMargin,
-                      styles.price,
-                      styles.priceSymbol,
-                    ]}
-                  >
-                    $
-                  </Text>
-                  <Text style={[styles.priceNumber, styles.price]}>222</Text>
-                </View>
-                <Text style={[Gutters.regularLMargin, Gutters.regularBMargin]}>
-                  Every month
+            <View>
+              <TouchableOpacity
+                style={[
+                  Layout.row,
+                  Layout.alignItemsCenter,
+                  styles.button,
+                  { width: '100%', backgroundColor: '#000' },
+                ]}
+                onPress={() => setShowSuccessModal(true)}
+              >
+                <Text style={[styles.buttonText, { color: '#fff' }]}>
+                  Pay with
                 </Text>
-              </View>
-
-              <View style={[Gutters.regularTMargin, styles.border]} />
-              <Text
-                style={[
-                  Gutters.regularTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} Perfect for a busy family
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} Valid for 3 months
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} 4 pick ups
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} Free detergent
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} 150lbs per month
-              </Text>
-              <Text style={[Gutters.regularTMargin, styles.saveValue]}>
-                Save $40.50
-              </Text>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Select and pay</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={[Gutters.largeLMargin, styles.planCard]}>
-              <Text style={styles.planTitle}>Green Plan</Text>
-              <View style={[Layout.row, styles.alignItemsEnd]}>
-                <View style={[Gutters.smallTMargin, Layout.row]}>
-                  <Text
-                    style={[
-                      Gutters.regularTMargin,
-                      styles.price,
-                      styles.priceSymbol,
-                    ]}
-                  >
-                    $
-                  </Text>
-                  <Text style={[styles.priceNumber, styles.price]}>60</Text>
-                </View>
-                <Text style={[Gutters.regularLMargin, Gutters.regularBMargin]}>
-                  Every month
-                </Text>
-              </View>
-
-              <View style={[Gutters.regularTMargin, styles.border]} />
-              <Text
-                style={[
-                  Gutters.regularTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} Perfect for single person or couple
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} Valid for 3 months
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} 4 pick ups
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} Free detergent
-              </Text>
-              <Text
-                style={[
-                  Gutters.tinyTMargin,
-                  styles.subItemText,
-                  styles.blackColor,
-                ]}
-              >
-                {'\u2022'} 40lbs per month
-              </Text>
-              <Text style={[Gutters.regularTMargin, styles.saveValue]}>
-                Save $17.50
-              </Text>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Select and pay</Text>
+                <Image style={{}} source={Images.apple_pay} resizeMode="cover" />
               </TouchableOpacity>
             </View>
           </ScrollView>
-          <Text style={[Gutters.largeTMargin, styles.description]}>
-            Membership plans are purchased for a 3 month period, & can not be
-            cancelled until then. You will be billed each month on the same day
-            that you purchased. If you are interested in gift certificates
-            please email or text us.
-          </Text>
+        )}
 
+        {currentStep < 6 && (
           <View style={[Layout.alignItemsCenter]}>
-            <TouchableOpacity style={[styles.button]} onPress={onNext}>
-              <Text style={styles.buttonText}>Continue to payment</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, { backgroundColor: '#F4F4F4' }]}
-              onPress={() => {
-                setShowSubscriptionModal(false)
-                setCurrentStep(6)
-              }}
-            >
-              <Text
-                style={[
-                  styles.buttonText,
-                  { color: '#000', fontWeight: '700' },
-                ]}
-              >
-                No thanks
+            <TouchableOpacity style={[styles.button , styles.continueBtn]} onPress={onNext}>
+              <Text style={styles.buttonText}>
+                {currentStep === 5 ? 'Confirm order' : 'Continue'}
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </Modal>
+        )}
 
-      <Modal animationType="slide" visible={showSuccessModal}>
-        <View
-          style={[
-            styles.modalContainer,
-            Layout.fill,
-            Layout.justifyContentCenter,
-            Layout.alignItemsCenter,
-          ]}
-        >
-          <TouchableOpacity
-            style={[styles.closeButton, { left: -15, top: 15 }]}
-            onPress={() => setShowSuccessModal(false)}
-          >
-            <Image source={Images.close} resizeMode="contain" />
-          </TouchableOpacity>
+        <Modal animationType="slide" visible={showSubscriptionModal}>
+          <View style={[styles.modalContainer, Layout.fill]}>
+            <TouchableOpacity
+              style={[styles.closeButton, { left: -15, top: 15 }]}
+              onPress={() => setShowSubscriptionModal(false)}
+            >
+              <Image source={Images.close} resizeMode="contain" />
+            </TouchableOpacity>
 
-          <Image source={Images.success} resizeMode="contain" />
+            <Text
+              style={{
+                marginTop: 50,
+                textAlign: 'center',
+                fontSize: 30,
+                fontWeight: '700',
+                color: '#43C3EF',
+              }}
+            >
+              Join our Monthly Plan to save more!
+            </Text>
+            <ScrollView horizontal contentContainerStyle={Gutters.largeVPadding}>
+              <View style={styles.planCard}>
+                <Image
+                  style={styles.markImage}
+                  source={Images.best_value}
+                  resizeMode="contain"
+                />
+                <Text style={styles.planTitle}>Gold Plan</Text>
+                <View style={[Layout.row, styles.alignItemsEnd]}>
+                  <View style={[Gutters.smallTMargin, Layout.row]}>
+                    <Text
+                      style={[
+                        Gutters.regularTMargin,
+                        styles.price,
+                        styles.priceSymbol,
+                      ]}
+                    >
+                      $
+                    </Text>
+                    <Text style={[styles.priceNumber, styles.price]}>111</Text>
+                  </View>
+                  <Text style={[Gutters.regularLMargin, Gutters.regularBMargin]}>
+                    Every month
+                  </Text>
+                </View>
 
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 40,
-              fontWeight: '700',
-              color: '#43C3EF',
-            }}
-          >
-            Order placed
-          </Text>
+                <View style={[Gutters.regularTMargin, styles.border]} />
+                <Text
+                  style={[
+                    Gutters.regularTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Perfect for a family
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Valid for 3 months
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} 2 pick ups
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Free detergent
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} 80lbs per month
+                </Text>
+                <Text style={[Gutters.regularTMargin, styles.saveValue]}>
+                  Save $28.00
+                </Text>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Select and pay</Text>
+                </TouchableOpacity>
+              </View>
 
-          <Text
-            style={[
-              Gutters.largeTMargin,
-              styles.description,
-              { color: 'black', textAlign: 'center' },
-            ]}
-          >
-            Your order is being assigned and you will receive a message from
-            your Freshie with an estimated pickup time.
-          </Text>
+              <View style={[Gutters.largeLMargin, styles.planCard]}>
+                <Text style={styles.planTitle}>Black Plan</Text>
+                <View style={[Layout.row, styles.alignItemsEnd]}>
+                  <View style={[Gutters.smallTMargin, Layout.row]}>
+                    <Text
+                      style={[
+                        Gutters.regularTMargin,
+                        styles.price,
+                        styles.priceSymbol,
+                      ]}
+                    >
+                      $
+                    </Text>
+                    <Text style={[styles.priceNumber, styles.price]}>222</Text>
+                  </View>
+                  <Text style={[Gutters.regularLMargin, Gutters.regularBMargin]}>
+                    Every month
+                  </Text>
+                </View>
 
+                <View style={[Gutters.regularTMargin, styles.border]} />
+                <Text
+                  style={[
+                    Gutters.regularTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Perfect for a busy family
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Valid for 3 months
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} 4 pick ups
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Free detergent
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} 150lbs per month
+                </Text>
+                <Text style={[Gutters.regularTMargin, styles.saveValue]}>
+                  Save $40.50
+                </Text>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Select and pay</Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={[Gutters.largeLMargin, styles.planCard]}>
+                <Text style={styles.planTitle}>Green Plan</Text>
+                <View style={[Layout.row, styles.alignItemsEnd]}>
+                  <View style={[Gutters.smallTMargin, Layout.row]}>
+                    <Text
+                      style={[
+                        Gutters.regularTMargin,
+                        styles.price,
+                        styles.priceSymbol,
+                      ]}
+                    >
+                      $
+                    </Text>
+                    <Text style={[styles.priceNumber, styles.price]}>60</Text>
+                  </View>
+                  <Text style={[Gutters.regularLMargin, Gutters.regularBMargin]}>
+                    Every month
+                  </Text>
+                </View>
+
+                <View style={[Gutters.regularTMargin, styles.border]} />
+                <Text
+                  style={[
+                    Gutters.regularTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Perfect for single person or couple
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Valid for 3 months
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} 4 pick ups
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} Free detergent
+                </Text>
+                <Text
+                  style={[
+                    Gutters.tinyTMargin,
+                    styles.subItemText,
+                    styles.blackColor,
+                  ]}
+                >
+                  {'\u2022'} 40lbs per month
+                </Text>
+                <Text style={[Gutters.regularTMargin, styles.saveValue]}>
+                  Save $17.50
+                </Text>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Select and pay</Text>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+            <Text style={[Gutters.largeTMargin, styles.description]}>
+              Membership plans are purchased for a 3 month period, & can not be
+              cancelled until then. You will be billed each month on the same day
+              that you purchased. If you are interested in gift certificates
+              please email or text us.
+            </Text>
+
+            <View style={[Layout.alignItemsCenter]}>
+              <TouchableOpacity style={[styles.button]} onPress={onNext}>
+                <Text style={styles.buttonText}>Continue to payment</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: '#F4F4F4' }]}
+                onPress={() => {
+                  setShowSubscriptionModal(false)
+                  setCurrentStep(6)
+                }}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    { color: '#000', fontWeight: '700' },
+                  ]}
+                >
+                  No thanks
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        <Modal animationType="slide" visible={showSuccessModal}>
           <View
             style={[
+              styles.modalContainer,
+              Layout.fill,
+              Layout.justifyContentCenter,
               Layout.alignItemsCenter,
-              Layout.largeTMargin,
-              { width: '100%' },
             ]}
           >
             <TouchableOpacity
-              style={[styles.button, { width: '100%' }]}
-              onPress={() => navigate('OrderDetail')}
+              style={[styles.closeButton, { left: -15, top: 15 }]}
+              onPress={() => setShowSuccessModal(false)}
             >
-              <Text style={styles.buttonText}>View my order</Text>
+              <Image source={Images.close} resizeMode="contain" />
             </TouchableOpacity>
+
+            <Image source={Images.success} resizeMode="contain" />
+
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 40,
+                fontWeight: '700',
+                color: '#43C3EF',
+              }}
+            >
+              Order placed
+            </Text>
+
+            <Text
+              style={[
+                Gutters.largeTMargin,
+                styles.description,
+                { color: 'black', textAlign: 'center' },
+              ]}
+            >
+              Your order is being assigned and you will receive a message from
+              your Freshie with an estimated pickup time.
+            </Text>
+
+            <View
+              style={[
+                Layout.alignItemsCenter,
+                Layout.largeTMargin,
+                { width: '100%' },
+              ]}
+            >
+              <TouchableOpacity
+                style={[styles.button, { width: '100%' }]}
+                onPress={() => navigate('OrderDetail')}
+              >
+                <Text style={styles.buttonText}>View my order</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Modal>
-    </SafeAreaView>
+        </Modal>
+      </SafeAreaView>
+    </ScrollView>
   )
 }
 
@@ -1161,6 +1164,9 @@ const styles = StyleSheet.create({
   description1: {
     textAlign: 'center',
     marginTop: 20,
+  },
+  continueBtn: {
+    marginTop: -20
   },
   contact: {
     textAlign: 'center',

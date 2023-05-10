@@ -17,7 +17,7 @@ const DESCRIPTIONS = [
   'We return your laundry the same day we pick up to your desired location.',
 ]
 
-const HowItWorks = ({ onClose }) => {
+const OrderSupportCom = ({ onClose }) => {
   const { Layout, Images, Gutters } = useTheme()
   const [currentStep, setCurrentStep] = useState(1)
 
@@ -38,7 +38,7 @@ const HowItWorks = ({ onClose }) => {
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Image source={Images.close} resizeMode="contain" />
           </TouchableOpacity>
-          <Text style={styles.title}>How it works</Text>
+          <Text style={styles.title}>Order Support</Text>
         </View>
 
         <View style={[Layout.fill]}>
@@ -83,7 +83,7 @@ const HowItWorks = ({ onClose }) => {
   )
 }
 
-export default HowItWorks
+export default OrderSupportCom
 
 const styles = StyleSheet.create({
   wrapper: {

@@ -14,6 +14,7 @@ import { Brand } from '@/Components'
 import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
 import { ScrollView } from 'react-native-gesture-handler'
+// import PhotoUpload from 'react-native-photo-upload'
 
 const FreshieOnboardingContainer = () => {
   const { Layout, Images, Fonts, Colors, Gutters } = useTheme()
@@ -219,6 +220,13 @@ const FreshieOnboardingContainer = () => {
                     <Text style={[Gutters.smallLMargin, { color: '#43C3EF' }]}>
                       Upload document image
                     </Text>
+                    {/* <PhotoUpload>
+                      <Image
+                        source={{
+                          uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
+                        }}
+                      />
+                    </PhotoUpload> */}
                   </View>
                 </TouchableOpacity>
               </View>

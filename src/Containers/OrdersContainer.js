@@ -20,209 +20,211 @@ const OrdersContainer = () => {
   const [showOrderModal, setShowOrderModal] = useState(false)
 
   return (
-    <SafeAreaView style={[Layout.fill, styles.container]}>
-      <View style={[styles.header, Layout.rowVCenter]}>
-        <Image source={Images.logo_blue} resizeMode="stretch" />
-        <TouchableOpacity
-          style={[styles.notification, Layout.center]}
-          // onPress={() => onChangeTheme({ darkMode: null })}
-        >
-          <Image
-            style={styles.bellIcon}
-            source={Images.notification_empty}
-            resizeMode="stretch"
-          />
-        </TouchableOpacity>
-      </View>
-      <View style={[Layout.fill, styles.wrapper]}>
-        <View style={[styles.tabs, Layout.rowVCenter]}>
+    <ScrollView style={styles.scrollView}>
+      <SafeAreaView style={[Layout.fill, styles.container]}>
+        <View style={[styles.header, Layout.rowVCenter]}>
+          <Image source={Images.logo_blue} resizeMode="stretch" />
           <TouchableOpacity
-            style={[
-              styles.tabItem,
-              Gutters.regularTMargin,
-              Layout.center,
-              selectedTab === 0 && styles.selected,
-            ]}
-            onPress={() => setSelectedTab(0)}
+            style={[styles.notification, Layout.center]}
+            // onPress={() => onChangeTheme({ darkMode: null })}
           >
-            <Text
-              style={[styles.tabText, selectedTab === 0 && styles.selectedText]}
-            >
-              My orders
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.tabText,
-              styles.tabItem,
-              Gutters.regularTMargin,
-              Layout.center,
-              selectedTab === 1 && styles.selected,
-            ]}
-            onPress={() => setSelectedTab(1)}
-          >
-            <Text
-              style={[styles.tabText, selectedTab === 1 && styles.selectedText]}
-            >
-              Order history
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {selectedTab === 0 && (
-          <View style={[Layout.fill, Layout.colHCenter]}>
             <Image
-              style={styles.backgroundImg}
-              source={Images.order_background}
+              style={styles.bellIcon}
+              source={Images.notification_empty}
               resizeMode="stretch"
             />
-
-            <Text style={[Fonts.textLarge, styles.title]}>
-              {"It's laundry\ntime!"}
-            </Text>
-
-            <Text style={[Fonts.textSmall, styles.text]}>
-              {'No laundry ordered yet. Start booking\nyour order now.'}
-            </Text>
-
+          </TouchableOpacity>
+        </View>
+        <View style={[Layout.fill, styles.wrapper]}>
+          <View style={[styles.tabs, Layout.rowVCenter]}>
             <TouchableOpacity
-              style={[styles.button, Layout.center]}
-              onPress={() => setShowOrderModal(true)}
+              style={[
+                styles.tabItem,
+                Gutters.regularTMargin,
+                Layout.center,
+                selectedTab === 0 && styles.selected,
+              ]}
+              onPress={() => setSelectedTab(0)}
             >
-              <Text style={[Fonts.textRegular, styles.buttonText]}>
-                Do my laundry now
+              <Text
+                style={[styles.tabText, selectedTab === 0 && styles.selectedText]}
+              >
+                My orders
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.tabText,
+                styles.tabItem,
+                Gutters.regularTMargin,
+                Layout.center,
+                selectedTab === 1 && styles.selected,
+              ]}
+              onPress={() => setSelectedTab(1)}
+            >
+              <Text
+                style={[styles.tabText, selectedTab === 1 && styles.selectedText]}
+              >
+                Order history
               </Text>
             </TouchableOpacity>
           </View>
-        )}
-        {selectedTab === 1 && (
-          <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={Gutters.largeBPadding}
-          >
-            <View style={styles.card}>
-              <View style={[Layout.row, Layout.justifyContentBetween]}>
-                <Text style={styles.orderNumber}>Order #891a72</Text>
-                <Image source={Images.checked} resizeMode="contain" />
-              </View>
-              <Text style={Gutters.smallTMargin}>
-                Order date: <Text style={styles.bold}>Wed Jun 23, 2022</Text>
+
+          {selectedTab === 0 && (
+            <View style={[Layout.fill, Layout.colHCenter]}>
+              <Image
+                style={styles.backgroundImg}
+                source={Images.order_background}
+                resizeMode="stretch"
+              />
+
+              <Text style={[Fonts.textLarge, styles.title]}>
+                {"It's laundry\ntime!"}
               </Text>
-              <View style={[Gutters.regularTMargin, styles.border]} />
-              <View style={[Gutters.smallTMargin, Layout.row]}>
-                <View style={Layout.fill}>
-                  <Text style={[Gutters.smallTMargin, styles.itemText]}>
-                    Amount:
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
-                    $32.00 ($0 Tip)
-                  </Text>
-                  <Text style={[Gutters.regularTMargin, styles.itemText]}>
-                    No. of bags
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>2</Text>
-                </View>
-                <View style={Layout.fill}>
-                  <Text style={[Gutters.smallTMargin, styles.itemText]}>
-                    Delivered by:
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
-                    Ambrose
-                  </Text>
-                  <Text style={[Gutters.regularTMargin, styles.itemText]}>
-                    Total weight:
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
-                    5.4 lbs
-                  </Text>
-                </View>
-              </View>
 
-              <View style={[Gutters.largeTMargin, Layout.row]}>
-                <View style={[Layout.fill, Gutters.smallRPadding]}>
-                  <TouchableOpacity style={styles.detailButton}>
-                    <Text style={styles.buttonText}>Order Details</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={[Layout.fill, Gutters.smallLPadding]}>
-                  <TouchableOpacity style={styles.messageButton}>
-                    <Text style={[styles.buttonText, { color: '#0E0E0E' }]}>
-                      Message
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.card}>
-              <View style={[Layout.row, Layout.justifyContentBetween]}>
-                <Text style={styles.orderNumber}>Order #962b43</Text>
-                <Image source={Images.checked} resizeMode="contain" />
-              </View>
-              <Text style={Gutters.smallTMargin}>
-                Order date: <Text style={styles.bold}>Wed Jun 12, 2022</Text>
+              <Text style={[Fonts.textSmall, styles.text]}>
+                {'No laundry ordered yet. Start booking\nyour order now.'}
               </Text>
-              <View style={[Gutters.regularTMargin, styles.border]} />
-              <View style={[Gutters.smallTMargin, Layout.row]}>
-                <View style={Layout.fill}>
-                  <Text style={[Gutters.smallTMargin, styles.itemText]}>
-                    Amount:
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
-                    $32.00 ($0 Tip)
-                  </Text>
-                  <Text style={[Gutters.regularTMargin, styles.itemText]}>
-                    No. of bags
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>2</Text>
-                </View>
-                <View style={Layout.fill}>
-                  <Text style={[Gutters.smallTMargin, styles.itemText]}>
-                    Delivered by:
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
-                    Ambrose
-                  </Text>
-                  <Text style={[Gutters.regularTMargin, styles.itemText]}>
-                    Total weight:
-                  </Text>
-                  <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
-                    5.4 lbs
-                  </Text>
-                </View>
-              </View>
 
-              <View style={[Gutters.largeTMargin, Layout.row]}>
-                <View style={[Layout.fill, Gutters.smallRPadding]}>
-                  <TouchableOpacity style={styles.detailButton}>
-                    <Text style={styles.buttonText}>Order Details</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={[Layout.fill, Gutters.smallLPadding]}>
-                  <TouchableOpacity style={styles.messageButton}>
-                    <Text style={[styles.buttonText, { color: '#0E0E0E' }]}>
-                      Message
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <TouchableOpacity
+                style={[styles.button, styles.doLaundry, Layout.center]}
+                onPress={() => setShowOrderModal(true)}
+              >
+                <Text style={[Fonts.textRegular, styles.buttonText]}>
+                  Do my laundry now
+                </Text>
+              </TouchableOpacity>
             </View>
-          </ScrollView>
-        )}
-      </View>
+          )}
+          {selectedTab === 1 && (
+            <ScrollView
+              style={styles.scrollView}
+              contentContainerStyle={Gutters.largeBPadding}
+            >
+              <View style={styles.card}>
+                <View style={[Layout.row, Layout.justifyContentBetween]}>
+                  <Text style={styles.orderNumber}>Order #891a72</Text>
+                  <Image source={Images.checked} resizeMode="contain" />
+                </View>
+                <Text style={Gutters.smallTMargin}>
+                  Order date: <Text style={styles.bold}>Wed Jun 23, 2022</Text>
+                </Text>
+                <View style={[Gutters.regularTMargin, styles.border]} />
+                <View style={[Gutters.smallTMargin, Layout.row]}>
+                  <View style={Layout.fill}>
+                    <Text style={[Gutters.smallTMargin, styles.itemText]}>
+                      Amount:
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
+                      $32.00 ($0 Tip)
+                    </Text>
+                    <Text style={[Gutters.regularTMargin, styles.itemText]}>
+                      No. of bags
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>2</Text>
+                  </View>
+                  <View style={Layout.fill}>
+                    <Text style={[Gutters.smallTMargin, styles.itemText]}>
+                      Delivered by:
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
+                      Ambrose
+                    </Text>
+                    <Text style={[Gutters.regularTMargin, styles.itemText]}>
+                      Total weight:
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
+                      5.4 lbs
+                    </Text>
+                  </View>
+                </View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showOrderModal}
-        onRequestClose={() => {
-          // Alert.alert('Modal has been closed.')
-          // setModalVisible(!modalVisible)
-        }}
-      >
-        <MyLaundry onClose={() => setShowOrderModal(false)} />
-      </Modal>
-    </SafeAreaView>
+                <View style={[Gutters.largeTMargin, Layout.row]}>
+                  <View style={[Layout.fill, Gutters.smallRPadding]}>
+                    <TouchableOpacity style={styles.detailButton}>
+                      <Text style={styles.buttonText}>Order Details</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={[Layout.fill, Gutters.smallLPadding]}>
+                    <TouchableOpacity style={styles.messageButton}>
+                      <Text style={[styles.buttonText, { color: '#0E0E0E' }]}>
+                        Message
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.card}>
+                <View style={[Layout.row, Layout.justifyContentBetween]}>
+                  <Text style={styles.orderNumber}>Order #962b43</Text>
+                  <Image source={Images.checked} resizeMode="contain" />
+                </View>
+                <Text style={Gutters.smallTMargin}>
+                  Order date: <Text style={styles.bold}>Wed Jun 12, 2022</Text>
+                </Text>
+                <View style={[Gutters.regularTMargin, styles.border]} />
+                <View style={[Gutters.smallTMargin, Layout.row]}>
+                  <View style={Layout.fill}>
+                    <Text style={[Gutters.smallTMargin, styles.itemText]}>
+                      Amount:
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
+                      $32.00 ($0 Tip)
+                    </Text>
+                    <Text style={[Gutters.regularTMargin, styles.itemText]}>
+                      No. of bags
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>2</Text>
+                  </View>
+                  <View style={Layout.fill}>
+                    <Text style={[Gutters.smallTMargin, styles.itemText]}>
+                      Delivered by:
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
+                      Ambrose
+                    </Text>
+                    <Text style={[Gutters.regularTMargin, styles.itemText]}>
+                      Total weight:
+                    </Text>
+                    <Text style={[Gutters.tinyTMargin, styles.itemValue]}>
+                      5.4 lbs
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={[Gutters.largeTMargin, Layout.row]}>
+                  <View style={[Layout.fill, Gutters.smallRPadding]}>
+                    <TouchableOpacity style={styles.detailButton}>
+                      <Text style={styles.buttonText}>Order Details</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={[Layout.fill, Gutters.smallLPadding]}>
+                    <TouchableOpacity style={styles.messageButton}>
+                      <Text style={[styles.buttonText, { color: '#0E0E0E' }]}>
+                        Message
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+          )}
+        </View>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showOrderModal}
+          onRequestClose={() => {
+            // Alert.alert('Modal has been closed.')
+            // setModalVisible(!modalVisible)
+          }}
+        >
+          <MyLaundry onClose={() => setShowOrderModal(false)} />
+        </Modal>
+      </SafeAreaView>
+    </ScrollView>
   )
 }
 
@@ -231,6 +233,9 @@ export default OrdersContainer
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
+  },
+  doLaundry: {
+    marginBottom: 70,
   },
   wrapper: {
     paddingHorizontal: 30,

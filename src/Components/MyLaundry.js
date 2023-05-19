@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   StyleSheet,
   View,
+  Alert,
   Image,
   Text,
   SafeAreaView,
@@ -36,28 +37,58 @@ const MyLaundry = ({ onClose }) => {
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
 
-  const onNext = async() => {
+  const onNext = () => {
     if (currentStep < 5) {
       setCurrentStep(currentStep + 1)
     } else if (currentStep === 5) {
       setShowSubscriptionModal(true)
-    } else if(showSubscriptionModal){
-      const response = await fetch('https://freshfabrics.app/api/v1/register/customer/inputs/verify', {
-      method: 'POST',
+    } else {
+      onClose()
+    }
+  }
+
+  const onConfirm = async() => {
+    const token = await AsyncStorage.getItem('token');
+    const params = {method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        "email": email,
-        "firstName": firstName,
-        "lastName": lastName,
-        "phoneNumber": phone,
-        "password": password
+        "bagCount": bagCount,
+        "orderSize": bagSize,
+        "detergentType": 1,
+        "insuranceType": insurance,
+        "pickupLocationType": 1,
+        "pickupInstructions": 1,
+        "preferredPickupWindowStart": null,
+        "preferredPickupWindowEnd": null,
+        "washInstructions": "Don't iron"
       }),
-    })
-    }else {
-      onClose()
+    };
+
+    console.log(20230518,`params`,params);
+
+    const response = await fetch('https://freshfabrics.app/api/v1/order/create',params);
+
+    console.log(20230518,`response`,response);
+    const result = await response.json();
+
+
+    console.log(20230518,`result`,result);
+
+    if(result.status == 200){
+      Alert.alert('Success', result.value, [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ,
+      ])
+    }
+    else{
+      Alert.alert('Error', result.value, [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ,
+      ])
     }
   }
 
@@ -964,7 +995,7 @@ const MyLaundry = ({ onClose }) => {
             </Text>
 
             <View style={[Layout.alignItemsCenter]}>
-              <TouchableOpacity style={[styles.button]} onPress={onNext}>
+              <TouchableOpacity style={[styles.button]} onPress={onConfirm}>
                 <Text style={styles.buttonText}>Continue to payment</Text>
               </TouchableOpacity>
               <TouchableOpacity

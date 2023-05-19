@@ -61,6 +61,7 @@ const CustomerOnboardingContainer = () => {
   }
 
   const onSignUp = async () => {
+
     const response = await fetch('https://freshfabrics.app/api/v1/register/customer/inputs/verify', {
         method: 'POST',
         headers: {
@@ -87,6 +88,16 @@ const CustomerOnboardingContainer = () => {
       })
       if(response.status === 200){
         navigate('Login');
+        const paymentCard = await fetch('https://freshfabrics.app/api/v1/paymentCard/create', {
+          fullName: firstName+' '+lastName,
+          cardNumber: cardInfo,
+          expMonth: cardDate.split('/')[0],
+          expYear: cardDate.split('/')[1],
+          cvc: cardCVC,
+        });
+        const paymentCardJson = await paymentCard.json();
+
+        Alert.alert(`create paymentCard`,paymentCardJson);
       }
       else if(response.status === 400){
         const user = await response.json();

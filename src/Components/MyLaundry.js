@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   StyleSheet,
   View,
@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import { useTheme } from '@/Hooks'
 import { navigate } from '@/Navigators/utils'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenHeight = Dimensions.get('window').height
 
@@ -35,15 +36,49 @@ const MyLaundry = ({ onClose }) => {
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
 
-  const onNext = () => {
+  const onNext = async() => {
     if (currentStep < 5) {
       setCurrentStep(currentStep + 1)
     } else if (currentStep === 5) {
       setShowSubscriptionModal(true)
-    } else {
+    } else if(showSubscriptionModal){
+      const response = await fetch('https://freshfabrics.app/api/v1/register/customer/inputs/verify', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": email,
+        "firstName": firstName,
+        "lastName": lastName,
+        "phoneNumber": phone,
+        "password": password
+      }),
+    })
+    }else {
       onClose()
     }
   }
+
+  useEffect( () => {
+
+    const putLogs = async () => {
+      const token = await AsyncStorage.getItem('token');
+      console.log(20230517,`token`,token);
+      console.log(20230517,`useEffect`);
+      console.log(20230517,`currentStep`,currentStep);
+      console.log(20230517,`bagSize`,bagSize);
+      console.log(20230517,`bagCount`,bagCount);
+      console.log(20230517,`preference`,preference);
+      console.log(20230517,`insurance`,insurance);
+      console.log(20230517,`showSubscriptionModal`,showSubscriptionModal);
+      console.log(20230517,`pickupSpot`,pickupSpot);
+      console.log(20230517,`showSuccessModal`,showSuccessModal);
+    };
+
+    putLogs();
+  },[currentStep,bagSize,bagCount,preference,insurance,showSubscriptionModal,pickupSpot,showSuccessModal] )
 
   return (
     <ScrollView>

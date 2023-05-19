@@ -15,6 +15,7 @@ import { Brand } from '@/Components'
 import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
 import jwt_decode from "jwt-decode";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginContainer = () => {
   const { Layout, Images, Fonts, Common, Colors, Gutters } = useTheme()
@@ -46,6 +47,7 @@ const LoginContainer = () => {
     if(jwt_token.status == 200)
     {
       const user = await jwt_token.json();
+      AsyncStorage.setItem('token', user.bearerToken);
       console.log(`user`,user);
 
       const decoded_token = jwt_decode(user.bearerToken);

@@ -19,6 +19,14 @@ const OrdersContainer = () => {
   const [selectedTab, setSelectedTab] = useState(0)
   const [showOrderModal, setShowOrderModal] = useState(false)
 
+  const onMessage = () => {
+    navigate('MessagePage');
+  }
+
+  const onOrderDetails = () => {
+    navigate('OrderDetailsPage');
+  }
+
   return (
     <ScrollView style={styles.scrollView}>
       <SafeAreaView style={[Layout.fill, styles.container]}>
@@ -141,12 +149,12 @@ const OrdersContainer = () => {
 
                 <View style={[Gutters.largeTMargin, Layout.row]}>
                   <View style={[Layout.fill, Gutters.smallRPadding]}>
-                    <TouchableOpacity style={styles.detailButton}>
+                    <TouchableOpacity style={styles.detailButton} onPress={() => onOrderDetails()}>
                       <Text style={styles.buttonText}>Order Details</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={[Layout.fill, Gutters.smallLPadding]}>
-                    <TouchableOpacity style={styles.messageButton}>
+                    <TouchableOpacity style={styles.messageButton} onPress={() => onMessage()}>
                       <Text style={[styles.buttonText, { color: '#0E0E0E' }]}>
                         Message
                       </Text>

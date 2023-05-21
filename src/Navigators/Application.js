@@ -10,6 +10,9 @@ import {
   FreshieIntroduction,
   LoginContainer,
   FreshieIntroductionContainer,
+  MessageContainer,
+  OrderDetailsContainer,
+  OrdersContainer
 } from '@/Containers'
 import { useTheme } from '@/Hooks'
 import MainNavigator from './Main'
@@ -43,6 +46,7 @@ const ApplicationNavigator = () => {
             component={FreshieIntroductionContainer}
           />
           <Stack.Screen name="Login" component={LoginContainer} />
+          <Stack.Screen name="OrdersContainer" component={OrdersContainer} />
           <Stack.Screen
             name="UserMain"
             component={MainNavigator}
@@ -50,6 +54,8 @@ const ApplicationNavigator = () => {
               animationEnabled: false,
             }}
           />
+          <Stack.Screen name="MessagePage" component={MessageContainer} />
+          <Stack.Screen name="OrderDetailsPage" component={OrderDetailsContainer} />
           <Stack.Screen
             name="FreshieMain"
             component={FreshieNavigator}

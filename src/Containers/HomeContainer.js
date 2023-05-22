@@ -16,9 +16,6 @@ const HomeContainer = () => {
   const { Layout, Images, Fonts, Colors, Gutters } = useTheme()
 
   return (
-    <ScrollView
-        style={styles.scrollView}
-      >
       <View style={[Layout.fill, styles.background]}>
         <Image
           style={styles.backgroundImg}
@@ -75,7 +72,6 @@ const HomeContainer = () => {
           </View>
         </View>
       </View>
-    </ScrollView>
   )
 }
 
@@ -87,7 +83,7 @@ const styles = StyleSheet.create({
   },
   backgroundImg: {
     width: '100%',
-    marginBottom: 20,
+    marginBottom: 0,
   },
   title: {
     color: '#ffffff',
@@ -97,7 +93,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontWeight: '500',
     lineHeight: 20,
-    marginTop: 15,
+    marginTop: 0,
   },
   container: {
     paddingHorizontal: 30,
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 80,
     backgroundColor: '#333593',
-    marginTop: 40,
+    marginTop: 25,
   },
   startBtnText: {
     color: '#ffffff',

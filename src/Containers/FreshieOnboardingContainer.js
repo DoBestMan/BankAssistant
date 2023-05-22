@@ -15,6 +15,7 @@ import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
 import { ScrollView } from 'react-native-gesture-handler'
 // import PhotoUpload from 'react-native-photo-upload'
+import { launchImageLibrary } from "react-native-image-picker"
 
 const FreshieOnboardingContainer = () => {
   const { Layout, Images, Fonts, Colors, Gutters } = useTheme()
@@ -32,10 +33,80 @@ const FreshieOnboardingContainer = () => {
   const [cardInfo, setCardInfo] = useState('')
   const [cardDate, setCardDate] = useState('')
   const [cardCVC, setCardCVC] = useState('')
+  const [filePath, setFilePath] = useState({});
+  const [filePathBack, setFilePathBack] = useState({});
 
   const [isMale, setIsMale] = useState(false)
 
-  useEffect(()=> {console.log(20230510,email)},[email])
+  const chooseFileBack = (type) => {
+    let options = {
+      mediaType: type,
+      maxWidth: 300,
+      maxHeight: 550,
+      quality: 1,
+    };
+    launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        alert('User cancelled camera picker');
+        return;
+      } else if (response.errorCode == 'camera_unavailable') {
+        alert('Camera not available on device');
+        return;
+      } else if (response.errorCode == 'permission') {
+        alert('Permission not satisfied');
+        return;
+      } else if (response.errorCode == 'others') {
+        alert(response.errorMessage);
+        return;
+      }
+      console.log('base64 -> ', response.base64);
+      console.log('uri -> ', response.uri);
+      console.log('width -> ', response.width);
+      console.log('height -> ', response.height);
+      console.log('fileSize -> ', response.fileSize);
+      console.log('type -> ', response.type);
+      console.log('fileName -> ', response.fileName);
+
+      setFilePathBack(response.assets[0]);
+    });
+  };
+
+  const chooseFile = (type) => {
+    let options = {
+      mediaType: type,
+      maxWidth: 300,
+      maxHeight: 550,
+      quality: 1,
+    };
+    launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+      if (response.didCancel) {
+        alert('User cancelled camera picker');
+        return;
+      } else if (response.errorCode == 'camera_unavailable') {
+        alert('Camera not available on device');
+        return;
+      } else if (response.errorCode == 'permission') {
+        alert('Permission not satisfied');
+        return;
+      } else if (response.errorCode == 'others') {
+        alert(response.errorMessage);
+        return;
+      }
+      console.log('base64 -> ', response.base64);
+      console.log('uri -> ', response.uri);
+      console.log('width -> ', response.width);
+      console.log('height -> ', response.height);
+      console.log('fileSize -> ', response.fileSize);
+      console.log('type -> ', response.type);
+      console.log('fileName -> ', response.fileName);
+      setFilePath(response.assets[0]);
+    });
+  };
+
+  useEffect(() => { console.log(20230510, email) }, [email])
 
   return (
     <SafeAreaView style={[Layout.fill, styles.background]}>
@@ -234,17 +305,15 @@ const FreshieOnboardingContainer = () => {
                   <View
                     style={[Layout.row, Layout.center, { paddingVertical: 30 }]}
                   >
-                    <Image source={Images.camera} resizeMode="contain" />
-                    <Text style={[Gutters.smallLMargin, { color: '#43C3EF' }]}>
-                      Upload document image
-                    </Text>
-                    {/* <PhotoUpload>
-                      <Image
-                        source={{
-                          uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
-                        }}
-                      />
-                    </PhotoUpload> */}
+                    {Object.keys(filePath).length == 0 &&
+                      <Text onPress={()=>{chooseFile('photo')}}>
+                        <Image source={Images.camera} resizeMode="contain" />
+                        <Text style={[Gutters.smallLMargin, { color: '#43C3EF' }]}>
+                          Upload document image
+                        </Text> 
+                      </Text>}
+                    {Object.keys(filePath).length != 0 && <Image source={{ uri: filePath.uri }} style={styles.imageStyle} />}
+
                   </View>
                 </TouchableOpacity>
               </View>
@@ -258,10 +327,14 @@ const FreshieOnboardingContainer = () => {
                   <View
                     style={[Layout.row, Layout.center, { paddingVertical: 30 }]}
                   >
-                    <Image source={Images.camera} resizeMode="contain" />
-                    <Text style={[Gutters.smallLMargin, { color: '#43C3EF' }]}>
-                      Upload document image
-                    </Text>
+                    {Object.keys(filePathBack).length == 0 &&
+                      <Text onPress={()=>{chooseFileBack('photo')}}>
+                        <Image source={Images.camera} resizeMode="contain" />
+                        <Text style={[Gutters.smallLMargin, { color: '#43C3EF' }]}>
+                          Upload document image
+                        </Text> 
+                      </Text>}
+                    {Object.keys(filePathBack).length != 0 && <Image source={{ uri: filePathBack.uri }} style={styles.imageStyle} />}
                   </View>
                 </TouchableOpacity>
               </View>
@@ -384,6 +457,11 @@ const styles = StyleSheet.create({
   progressBar: {
     backgroundColor: '#56DBAB',
     height: 4,
+  },
+  imageStyle: {
+    width: 200,
+    height: 100,
+    margin: 5,
   },
   descriptionText: {
     color: '#A7A7A7',

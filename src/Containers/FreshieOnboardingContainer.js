@@ -213,7 +213,7 @@ const FreshieOnboardingContainer = () => {
 
       {currentStep === 3 && (
         <View style={[Layout.fill, styles.container]}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={[Fonts.textLarge, styles.title]}>Identity</Text>
             <Text style={[Fonts.textLarge, styles.title]}>verification</Text>
 

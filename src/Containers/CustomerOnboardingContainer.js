@@ -108,8 +108,7 @@ const CustomerOnboardingContainer = () => {
     }
 
   return (
-    <ScrollView
-      >
+    <ScrollView style={{height: '100%', backgroundColor: '#fff'}}>
       <SafeAreaView style={[Layout.fill, styles.background]}>
         <View>
           <View

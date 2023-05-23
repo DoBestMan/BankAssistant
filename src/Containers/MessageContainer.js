@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { ScrollView } from 'react-native-gesture-handler'
 import { navigate } from '@/Navigators/utils'
 
 const MENU_ITEMS = [
@@ -22,14 +21,11 @@ const MessageContainer = ({ onClose }) => {
 
   const onBack = () => {
     navigate('OrdersContainer')
-
   }
   
   return (
-    <ScrollView>
-      <SafeAreaView style={styles.wrapper}>
+      <SafeAreaView style={[styles.wrapper, { height: '100%' } ]}>
         <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
-          
           <TouchableOpacity
             style={[styles.OrderName]}
           >
@@ -44,7 +40,6 @@ const MessageContainer = ({ onClose }) => {
             <Text style={[ styles.subtitle]}>End Chat</Text>
           </TouchableOpacity>
         </View>
-      
         <View style={[styles.wrapper, styles.card, styles.selected]}>
           <Text style={[styles.subtitle, styles.question]}>Issue</Text>
           <Text style={[styles.itemText, styles.itemPg]}>My laundry was not delivered</Text>
@@ -65,7 +60,6 @@ const MessageContainer = ({ onClose }) => {
         </View>
 
       </SafeAreaView>
-    </ScrollView>
   )
 }
 

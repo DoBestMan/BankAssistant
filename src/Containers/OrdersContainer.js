@@ -28,7 +28,6 @@ const OrdersContainer = () => {
   }
 
   return (
-    <ScrollView style={styles.scrollView}>
       <SafeAreaView style={[Layout.fill, styles.container]}>
         <View style={[styles.header, Layout.rowVCenter]}>
           <Image source={Images.logo_blue} resizeMode="stretch" />
@@ -108,6 +107,7 @@ const OrdersContainer = () => {
             <ScrollView
               style={styles.scrollView}
               contentContainerStyle={Gutters.largeBPadding}
+              showsVerticalScrollIndicator={false}
             >
               <View style={styles.card}>
                 <View style={[Layout.row, Layout.justifyContentBetween]}>
@@ -232,7 +232,6 @@ const OrdersContainer = () => {
           <MyLaundry onClose={() => setShowOrderModal(false)} />
         </Modal>
       </SafeAreaView>
-    </ScrollView>
   )
 }
 
@@ -283,7 +282,7 @@ const styles = StyleSheet.create({
   },
   backgroundImg: {
     alignSelf: 'center',
-    marginTop: 120,
+    marginTop: 50,
   },
   title: {
     color: '#43C3EF',

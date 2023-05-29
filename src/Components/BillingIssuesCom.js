@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { ScrollView } from 'react-native-gesture-handler'
 
 const TITLES = ['Order online', 'Wash. Dry. Fold.', 'Deliver on time']
 const DESCRIPTIONS = [
@@ -32,54 +31,52 @@ const BillingIssuesCom = ({ onClose }) => {
   }
 
   return (
-    <ScrollView>
-      <SafeAreaView style={styles.wrapper}>
-        <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Image source={Images.close} resizeMode="contain" />
-          </TouchableOpacity>
-          <Text style={styles.title}>Billing Issues</Text>
-        </View>
+    <SafeAreaView style={styles.wrapper}>
+      <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
+        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <Image source={Images.close} resizeMode="contain" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Billing Issues</Text>
+      </View>
 
-        <View style={[Layout.fill]}>
-          <View
-            style={[
-              styles.imageWrapper,
-              Layout.fill,
-              Layout.alignItemsCenter,
-              Layout.justifyContentCenter,
-            ]}
-          >
-            <Image source={images[currentStep - 1]} resizeMode="contain" />
+      <View style={[Layout.fill]}>
+        <View
+          style={[
+            styles.imageWrapper,
+            Layout.fill,
+            Layout.alignItemsCenter,
+            Layout.justifyContentCenter,
+          ]}
+        >
+          <Image source={images[currentStep - 1]} style={{marginTop: currentStep == 2? 30: 90}} resizeMode="contain" />
+        </View>
+      <View style={[Layout.alignItemsCenter, styles.orderOnline]}>
+          <View style={styles.stepNumberWrapper}>
+            <Text style={styles.stepNumber}>{currentStep}</Text>
           </View>
-        <View style={[Layout.alignItemsCenter, styles.orderOnline]}>
-            <View style={styles.stepNumberWrapper}>
-              <Text style={styles.stepNumber}>{currentStep}</Text>
-            </View>
-            <Text style={styles.stepTitle}>{TITLES[currentStep - 1]}</Text>
-            <Text style={styles.description}>
-              {DESCRIPTIONS[currentStep - 1]}
-            </Text>
-            <TouchableOpacity style={styles.button} onPress={onNext}>
-              <Text style={styles.buttonText}>Next</Text>
-            </TouchableOpacity>
-            <View style={[Layout.row, Gutters.regularBMargin]}>
-              {Array(3)
-                .fill()
-                .map((value, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={[
-                      styles.stepDot,
-                      index === currentStep - 1 && styles.dotSelected,
-                    ]}
-                  />
-                ))}
-            </View>
+          <Text style={styles.stepTitle}>{TITLES[currentStep - 1]}</Text>
+          <Text style={styles.description}>
+            {DESCRIPTIONS[currentStep - 1]}
+          </Text>
+          <TouchableOpacity style={styles.button} onPress={onNext}>
+            <Text style={styles.buttonText}>Next</Text>
+          </TouchableOpacity>
+          <View style={[Layout.row, Gutters.regularBMargin]}>
+            {Array(3)
+              .fill()
+              .map((value, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.stepDot,
+                    index === currentStep - 1 && styles.dotSelected,
+                  ]}
+                />
+              ))}
           </View>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </View>
+    </SafeAreaView>
   )
 }
 

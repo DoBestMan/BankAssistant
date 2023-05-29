@@ -30,7 +30,7 @@ const FaqCom = ({ onClose }) => {
   }
   
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <SafeAreaView style={styles.wrapper}>
         <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
           <TouchableOpacity style={styles.closeButton} onPress={onBack}>

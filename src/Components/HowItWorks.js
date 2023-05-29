@@ -32,7 +32,6 @@ const HowItWorks = ({ onClose }) => {
   }
 
   return (
-    <ScrollView>
       <SafeAreaView style={styles.wrapper}>
         <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
@@ -50,7 +49,7 @@ const HowItWorks = ({ onClose }) => {
               Layout.justifyContentCenter,
             ]}
           >
-            <Image source={images[currentStep - 1]} resizeMode="contain" />
+            <Image source={images[currentStep - 1]} style={{marginTop: currentStep == 2? 30: 90}} resizeMode="contain" />
           </View>
         <View style={[Layout.alignItemsCenter, styles.orderOnline]}>
             <View style={styles.stepNumberWrapper}>
@@ -61,7 +60,7 @@ const HowItWorks = ({ onClose }) => {
               {DESCRIPTIONS[currentStep - 1]}
             </Text>
             <TouchableOpacity style={styles.button} onPress={onNext}>
-              <Text style={styles.buttonText}>Next</Text>
+              <Text style={styles.buttonText}>Next1</Text>
             </TouchableOpacity>
             <View style={[Layout.row, Gutters.regularBMargin]}>
               {Array(3)
@@ -79,7 +78,6 @@ const HowItWorks = ({ onClose }) => {
           </View>
         </View>
       </SafeAreaView>
-    </ScrollView>
   )
 }
 

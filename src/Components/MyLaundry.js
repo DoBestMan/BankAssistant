@@ -82,13 +82,11 @@ const MyLaundry = ({ onClose }) => {
     if (result.status == 200) {
       Alert.alert('Success', result.value, [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ,
       ])
     }
     else {
       Alert.alert('Error', result.value, [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ,
       ])
     }
   }
@@ -401,7 +399,7 @@ const MyLaundry = ({ onClose }) => {
               >
                 <Text style={styles.preferenceText}>Custom</Text>
                 <Text style={{ fontSize: 12, color: 'gray', marginTop: 10 }}>
-                  Can't leave your laundry out for pickup?
+                  Can&apos;t leave your laundry out for pickup?
                 </Text>
                 <Text style={{ fontSize: 12, color: 'gray' }}>
                   No problem, we can accomodate you.
@@ -506,7 +504,6 @@ const MyLaundry = ({ onClose }) => {
                     borderBottomColor: '#E2E2E2',
                     borderBottomWidth: 1,
                   },
-                  ,
                 ]}
               >
                 <Text style={styles.preferenceText}>High-efficiency</Text>
@@ -571,7 +568,6 @@ const MyLaundry = ({ onClose }) => {
                     borderBottomColor: '#E2E2E2',
                     borderBottomWidth: 1,
                   },
-                  ,
                 ]}
               >
                 <Text style={{ fontSize: 12 }}>

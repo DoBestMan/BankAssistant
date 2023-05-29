@@ -7,7 +7,6 @@ import {
   Text,
   TouchableOpacity,
   Modal,
-  Alert,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
 import { HowItWorks } from '@/Components'

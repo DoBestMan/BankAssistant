@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { navigate } from '@/Navigators/utils'
 import { useState } from 'react'
 
 const PricingContainer = () => {

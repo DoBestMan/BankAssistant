@@ -10,29 +10,14 @@ import {
 } from 'react-native'
 import { useState } from 'react'
 import { useTheme } from '@/Hooks'
-import { Brand } from '@/Components'
-import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
 import { ScrollView } from 'react-native-gesture-handler'
-// import PhotoUpload from 'react-native-photo-upload'
 import { launchImageLibrary } from "react-native-image-picker"
 
 const FreshieOnboardingContainer = () => {
-  const { Layout, Images, Fonts, Colors, Gutters } = useTheme()
+  const { Layout, Images, Fonts, Gutters } = useTheme()
   const [currentStep, setCurrentStep] = useState(1)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPasswrd] = useState('')
-  const [phone, setPhone] = useState('')
-  const [address, setAddress] = useState('')
-  const [addressSecond, setAddressSecond] = useState('')
-  const [state, setState] = useState('')
-  const [zip, setZip] = useState('')
-  const [cardName, setCardName] = useState('')
-  const [cardInfo, setCardInfo] = useState('')
-  const [cardDate, setCardDate] = useState('')
-  const [cardCVC, setCardCVC] = useState('')
   const [filePath, setFilePath] = useState({});
   const [filePathBack, setFilePathBack] = useState({});
 
@@ -298,7 +283,7 @@ const FreshieOnboardingContainer = () => {
               </View>
 
               <Text style={[Gutters.smallBMargin, Gutters.regularTMargin]}>
-                Your driver's license (Front)
+                Your driver&apos;s license (Front)
               </Text>
               <View style={styles.shadow}>
                 <TouchableOpacity>
@@ -319,7 +304,7 @@ const FreshieOnboardingContainer = () => {
               </View>
 
               <Text style={[Gutters.smallBMargin, Gutters.regularTMargin]}>
-                Your driver's license (Back)
+                Your driver&apos;s license (Back)
               </Text>
 
               <View style={styles.shadow}>

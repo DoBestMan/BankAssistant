@@ -1,33 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   View,
   Image,
   Text,
   SafeAreaView,
-  TouchableOpacity,
-  TextInput,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { ScrollView } from 'react-native-gesture-handler'
-import DropDownPicker from "react-native-dropdown-picker";
-import { Translation } from 'react-i18next';
 
-const Rewards = ({ onClose }) => {
-  const { Layout, Images, Common, Gutters } = useTheme()
-
-  const onSubmit = () => {
-    console.log(20230510,'onsubmit');
-    onClose();
-  }
+const Rewards = () => {
+  const { Layout, Images} = useTheme()
 
   return (
       <SafeAreaView style={styles.wrapper}>
-        {/* <View style={[styles.header]}>
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Image source={Images.left_arrow} resizeMode="contain" />
-          </TouchableOpacity>
-        </View> */}
         <View
           style={[
             styles.imageWrapper,

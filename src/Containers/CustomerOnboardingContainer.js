@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   SafeAreaView,
   View,
@@ -11,13 +11,11 @@ import {
 } from 'react-native'
 import { useState } from 'react'
 import { useTheme } from '@/Hooks'
-import { Brand } from '@/Components'
-import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
 import { ScrollView } from 'react-native-gesture-handler'
 
 const CustomerOnboardingContainer = () => {
-  const { Layout, Images, Fonts, Common, Colors, Gutters } = useTheme()
+  const { Layout, Images, Fonts, Common, Gutters } = useTheme()
   const [currentStep, setCurrentStep] = useState(1)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')

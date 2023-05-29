@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   SafeAreaView,
   View,
@@ -10,15 +10,11 @@ import {
 } from 'react-native'
 import { useState } from 'react'
 import { useTheme } from '@/Hooks'
-import { Brand } from '@/Components'
-import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
-import { ScrollView } from 'react-native-gesture-handler'
 
 const FreshieIntroductionContainer = () => {
-  const { Layout, Images, Fonts, Colors, Gutters } = useTheme()
+  const { Layout, Images, Fonts, Gutters } = useTheme()
   const [currentStep, setCurrentStep] = useState(0)
-  const [isMale, setIsMale] = useState(false)
 
   return (
     <SafeAreaView style={[Layout.fill, styles.background]}>

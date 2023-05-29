@@ -9,14 +9,12 @@ import {
   Modal,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { navigate } from '@/Navigators/utils'
 import { useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
-import { MyLaundry } from '@/Components'
 import OrderDetail from '@/Components/OrderDetails'
 
 const FreshieOrdersContainer = ({ modalType = 'active', onClose }) => {
-  const { Layout, Images, Fonts, Common, Colors, Gutters } = useTheme()
+  const { Layout, Images,  Common, Colors, Gutters } = useTheme()
   const [selectedTab, setSelectedTab] = useState(modalType)
   const [showOrderModal, setShowOrderModal] = useState(false)
 
@@ -81,7 +79,6 @@ const FreshieOrdersContainer = ({ modalType = 'active', onClose }) => {
               Layout.center,
               selectedTab === 'available' && styles.selected,
               { position: 'relative' },
-              ,
             ]}
             onPress={() => setSelectedTab('available')}
           >

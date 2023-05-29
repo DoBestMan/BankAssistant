@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { ScrollView } from 'react-native-gesture-handler'
 
 const TITLES = ['Order online', 'Wash. Dry. Fold.', 'Deliver on time']
 const DESCRIPTIONS = [

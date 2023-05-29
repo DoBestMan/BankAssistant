@@ -66,7 +66,7 @@ const PricingContainer = () => {
           </TouchableOpacity>
         </View>
         {selectedTab === 0 && (
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={[Fonts.textSmall, styles.text]}>
               Please note that we are a wash, dry, and fold service. We clean
               and sanitize all fabrics in a washing machine. If you would prefer

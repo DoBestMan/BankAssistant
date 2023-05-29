@@ -32,7 +32,6 @@ const ReportProblemCom = ({ onClose }) => {
   }
 
   return (
-    <ScrollView>
       <SafeAreaView style={styles.wrapper}>
         <View style={[styles.header, Layout.row, Layout.alignItemsCenter]}>
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
@@ -50,7 +49,7 @@ const ReportProblemCom = ({ onClose }) => {
               Layout.justifyContentCenter,
             ]}
           >
-            <Image source={images[currentStep - 1]} resizeMode="contain" />
+            <Image source={images[currentStep - 1]} style={{marginTop: currentStep == 2? 30: 90}} resizeMode="contain" />
           </View>
         <View style={[Layout.alignItemsCenter, styles.orderOnline]}>
             <View style={styles.stepNumberWrapper}>
@@ -79,7 +78,6 @@ const ReportProblemCom = ({ onClose }) => {
           </View>
         </View>
       </SafeAreaView>
-    </ScrollView>
   )
 }
 

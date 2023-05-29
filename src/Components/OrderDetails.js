@@ -12,45 +12,6 @@ import { useTheme } from '@/Hooks'
 import { useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 
-const payouts = [
-  {
-    date: '27/05/2022',
-    orderNumber: '#891a72',
-    earnings: 23.52,
-    status: 'Processing',
-  },
-  {
-    date: '27/05/2022',
-    orderNumber: '#891a34',
-    earnings: 10.5,
-    status: 'Paid',
-  },
-  {
-    date: '27/05/2022',
-    orderNumber: '#891a67',
-    earnings: 13.87,
-    status: 'Paid',
-  },
-  {
-    date: '27/05/2022',
-    orderNumber: '#892a72',
-    earnings: 23.52,
-    status: 'Paid',
-  },
-  {
-    date: '27/05/2022',
-    orderNumber: '#881a34',
-    earnings: 10.5,
-    status: 'Paid',
-  },
-  {
-    date: '27/05/2022',
-    orderNumber: '#871a67',
-    earnings: 13.87,
-    status: 'Paid',
-  },
-]
-
 const OrderDetails = ({ onClose }) => {
   const { Layout, Images, Common, Colors, Gutters } = useTheme()
   const [showDetailModal, setShowDetailModal] = useState(false)
@@ -153,7 +114,6 @@ const OrderDetails = ({ onClose }) => {
                     Layout.alignItemsCenter,
                     Gutters.tinyTMargin,
                     { justifyContent: 'flex-end' },
-                    ,
                   ]}
                 >
                   <Image source={Images.pin} resizeMode="contain" />

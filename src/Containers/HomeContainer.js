@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
-  SafeAreaView,
   View,
   StyleSheet,
   Image,
@@ -8,10 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { Brand } from '@/Components'
-import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
-import { ScrollView } from 'react-native-gesture-handler'
 const HomeContainer = () => {
   const { Layout, Images, Fonts, Colors, Gutters } = useTheme()
 

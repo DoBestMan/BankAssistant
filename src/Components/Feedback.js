@@ -9,14 +9,11 @@ import {
   TextInput,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { ScrollView } from 'react-native-gesture-handler'
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Feedback = ({ onClose }) => {
   const { Layout, Images, Common } = useTheme()
   const [isSent, setIsSent] = useState(false)
-
-  const images = [Images.howItWorks1, Images.howItWorks2, Images.howItWorks3]
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("1");

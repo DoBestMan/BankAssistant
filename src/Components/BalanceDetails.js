@@ -11,7 +11,6 @@ import {
 import { useTheme } from '@/Hooks'
 import { useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
-import OrderDetail from '@/Components/OrderDetails'
 
 const payouts = [
   {

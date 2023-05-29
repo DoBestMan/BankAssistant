@@ -93,7 +93,6 @@ const FreshieMyOrdersContainer = () => {
               {
                 position: 'relative',
               },
-              ,
             ]}
           >
             <TouchableOpacity

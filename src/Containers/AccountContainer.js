@@ -26,7 +26,6 @@ const MENU_ITEMS = [
   'Become a Freshie',
   'Feedback',
   'Log out',
-  ,
 ]
 
 const AccountContainer = () => {

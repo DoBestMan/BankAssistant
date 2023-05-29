@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   View,
@@ -9,8 +9,6 @@ import {
   TextInput,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { ScrollView } from 'react-native-gesture-handler'
-import DropDownPicker from "react-native-dropdown-picker";
 
 const PaymentMethods = ({ onClose }) => {
   const { Layout, Images, Common, Gutters } = useTheme()

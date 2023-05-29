@@ -7,10 +7,9 @@ import {
   Text,
   TouchableOpacity,
   Modal,
-  Alert,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { HowItWorks, BalanceDetails } from '@/Components'
+import { BalanceDetails } from '@/Components'
 import { ScrollView } from 'react-native-gesture-handler'
 
 const payouts = [
@@ -55,12 +54,6 @@ const payouts = [
 const MyMoneyContainer = () => {
   const { Layout, Images, Common, Colors, Gutters } = useTheme()
   const [modalVisible, setModalVisible] = useState(false)
-
-  const onClick = index => {
-    if (index === 0) {
-      setModalVisible(!modalVisible)
-    }
-  }
 
   return (
     <SafeAreaView style={[Layout.fill, styles.container]}>

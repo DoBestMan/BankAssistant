@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   Alert,
   SafeAreaView,
@@ -11,14 +11,12 @@ import {
 } from 'react-native'
 import { useState } from 'react'
 import { useTheme } from '@/Hooks'
-import { Brand } from '@/Components'
-import { setDefaultTheme } from '@/Store/Theme'
 import { navigate } from '@/Navigators/utils'
 import jwt_decode from "jwt-decode";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginContainer = () => {
-  const { Layout, Images, Fonts, Common, Colors, Gutters } = useTheme()
+  const { Layout, Images, Fonts, Common, Gutters } = useTheme()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -27,7 +25,6 @@ const LoginContainer = () => {
     if (email === '' || password === '') {
       Alert.alert('Error', 'Please enter email and password!', [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ,
       ])
       return
     }
@@ -57,7 +54,6 @@ const LoginContainer = () => {
     else{
       Alert.alert('Error', 'Email or Password is wrong!', [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ,
       ])
     }
   }

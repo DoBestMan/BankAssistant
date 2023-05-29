@@ -4,7 +4,6 @@
  * Use it to define generic component styles (e.g. the default text styles, default button styles...).
  */
 import { StyleSheet } from 'react-native'
-import { Layout } from '.'
 import buttonStyles from './components/Buttons'
 /**
  *

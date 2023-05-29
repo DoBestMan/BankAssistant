@@ -8,13 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { ScrollView } from 'react-native-gesture-handler'
-
-const MENU_ITEMS = [
-  [ 'Ordering', "What's included?", 'Is there a minimum?', 'Do you service my area?' ],
-  [ 'Preparing for pick', 'Do I put my clothes out for pick up in laundry bags?', 'What days do you pick up and deliver?', 'Do I have to serparate lights and darks?' ],
-  [ 'Care of clothes', 'Do you launder clothes in cold wather or hot?', 'Do you use fabric softener' ]
-]
 
 const OrderSupportCom = ({ onClose }) => {
   const { Layout, Images, Gutters, Fonts } = useTheme()
